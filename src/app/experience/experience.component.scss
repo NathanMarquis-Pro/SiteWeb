@@ -1,18 +1,3 @@
-:host {
-  section#experience {
-    display: none; // This section is initially hidden as per original CSS
-    padding: 50px 2% 20px; // Standard section padding
-    text-align: center; // Center the content like "Rien ici pour l'instant"
-
-    h1 {
-      margin-top: 10px; // Standard h1 margin
-      margin-bottom: 20px; // Add some space below the heading
-    }
-
-    p {
-      text-align: center; // Ensure paragraph text is centered
-      font-size: 18px; // Standard text size
-      margin-bottom: 40px; // Standard p margin
-    }
-  }
+#experience{
+  display: none; 
 }

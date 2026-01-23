@@ -1,43 +1,19 @@
-:host {
-  section#projets {
-    padding: 50px 2% 20px; // Standard section padding
-
-    h1 {
-      margin-top: 10px; // Standard h1 margin
-      text-align: center; // Projects title centered
-    }
-
-    .scroll-container {
-      display: flex;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      padding: 10px; // Padding around the scrollable area
-      justify-content: flex-start; // Align items to the start
-    }
-
-    .scroll-item { // Applied to .card.element-projets
-      flex: 0 0 auto; // Prevent shrinking/growing
-      width: 300px;   // Fixed width for each card
-      margin: 15px;   // Margin around each card
-      // Bootstrap .card class will provide base styling (border, etc.)
-
-      // Assuming .element-projets is the same as .card in this context
-      // If .card-img-top-projets has specific styles different from .card-img-top:
-      // .card-img-top-projets { /* styles here */ }
-      // else, Bootstrap .card-img-top is used.
-
-      .card-body-projets { // Specific to card-body in this section
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; // Pushes button to the bottom if card height varies
-        height: 100%; // Make card body take full height of its flex allocation if needed.
-                      // This helps align buttons if text length differs.
-
-        .btn { // Style for .btn within .card-body-projets
-          align-self: flex-start; // Align button to the left
-          // Bootstrap .btn and .btn-primary provide base button styling
-        }
-      }
-    }
-  }
+.scroll-container {
+     display: flex;
+     overflow-x: auto;
+     flex-wrap: nowrap;
+     padding: 10px;
+}
+.scroll-item {
+    flex: 0 0 auto;
+    width: 300px;
+    margin: 15px;
+}
+.card-body-projets{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.btn{
+    align-self: flex-start;
 }

@@ -1,6 +1,42 @@
 // Assuming --couleurtheme and --couleurdiv are globally defined.
+/*Compétences*/
+#competences{
+    background-color: var(--couleurtheme);
+}
+.element_competence{
+    margin: 20px;
+    padding: 5px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.card-img-top-competences{
+    position: inherit;
+    max-width: 150px;
+    max-height: 150px;
+    padding: 10px;
+}
+.card-body-competences{
+    display: flex;
+    align-items: flex-end;
+}
+.card-header-competences{
+    background-color: var(--couleurdiv);
+    min-height: 100px;
+    width: 100%;
+}
+.img_html_css{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+.card{
+    position: inherit;
+}
+/*:host {
 
-:host {
   section#competences {
     padding: 50px 2% 20px; // Standard section padding
     background-color: var(--couleurtheme); // CSS Variable for background
@@ -76,3 +112,4 @@
     }
   }
 }
+*/

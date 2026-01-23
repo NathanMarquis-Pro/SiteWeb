@@ -1,0 +1,20 @@
+#contact{
+    background-color: var(--couleurfooter);
+    color: white;
+}
+.gird-element{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+.gird-element:hover {
+    cursor: pointer;
+}
+.img_contact{
+    width: 40px;
+    margin-left: 20px;
+}

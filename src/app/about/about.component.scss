@@ -1,58 +1,30 @@
-:host {
-  section#a_propos {
-    padding: 50px 2% 20px; // Standard section padding
+/*A propos*/
+#a_propos{
     min-height: 30svh;
+}
+#conteneur_a_propos{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#img_moi {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 100px;
+    // background-color: white; // Optional: if image has transparency and needs white bg
+    // padding: 5px; // Optional: if spacing around image is needed
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
 
-    h1 {
-      margin-top: 10px; // Standard h1 margin
+@media only screen and (max-width: 720px){
+    #img_moi{
+        display: none;
     }
-
-    #conteneur_a_propos {
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-wrap: wrap; // Allow wrapping for smaller screens
-
-      img#img_moi { // Specific styling for the image in this section
-        max-width: 200px;
-        max-height: 200px;
-        border-radius: 100px; // Make it circular
-        // background-color: white; // Optional: if image has transparency and needs white bg
-        // padding: 5px; // Optional: if spacing around image is needed
-        margin-bottom: 20px; // Space below image on small screens if it wraps
-        margin-right: 20px; // Space to the right of the image
-      }
-
-      p.text.text-size-60per {
-        font-size: 18px; // from .text
-        width: 60%; // from .text-size-60per
-        text-align: justify;
-        margin-bottom: 40px; // from p
-        flex-basis: 60%; // For flex layout, allow it to take up its width
-        min-width: 300px; // Prevent it from becoming too narrow
-      }
+    #intro h1{
+        padding: 0 20px 0 20px;
+        color: aqua;
     }
-  }
-
-  // Responsive adjustments if needed
-  @media (max-width: 720px) {
-    section#a_propos {
-      #conteneur_a_propos {
-        flex-direction: column; // Stack image and text vertically
-        align-items: center; // Center items when stacked
-
-        img#img_moi {
-          margin-right: 0; // No right margin when stacked
-          margin-bottom: 20px; // Ensure space below image
-        }
-
-        p.text.text-size-60per {
-          width: 90%; // Allow text to take more width on small screens
-          flex-basis: auto;
-          text-align: center; // Center text on small screens
-        }
-      }
-    }
-  }
 }

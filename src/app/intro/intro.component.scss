@@ -1,8 +1,4 @@
-// Assuming --couleurnav is globally defined, e.g., in src/styles.scss
-// If not, these styles might not render correctly.
-
-:host { // Styles within :host will be encapsulated to this component.
-  section#intro { // Targeting the section within this component
+#intro{
     background-image: url('../../assets/backgroundTitre.jpg');
     background-repeat: no-repeat;
     background-position: top;
@@ -10,89 +6,64 @@
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
-    height: 65svh; // svh unit might not be supported in older browsers
+    height : 65svh;
     min-height: 450px;
-    color: white; // Default text color for this section
-
-    // Styles for elements within this component's section#intro
-    #conteneur_intro {
-      padding-top: 20px;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      background-color: rgba(0, 0, 0, 0.5); // Semi-transparent overlay
-
-      & > hr { // Direct child hr of conteneur_intro
-        width: 60%;
-        display: block;
-        border-color: white; // Explicitly set hr color as it's on dark background
-        opacity: 1;
-      }
-
-      h1 { // Specific to h1 within intro
-        text-align: center;
-        font-size: 4em; // Consider if this should be responsive
-        margin-top: 10px; // From original global h1 style
-      }
-    }
-
-    #intro_sous_div_txt {
-      width: 60%;
-      max-width: 1000px;
-
-      & > p { // Direct child p of intro_sous_div_txt
-        text-align: center;
-        font-size: 18px; // from .text class
-        margin-bottom: 40px; // from original global p style
-      }
-    }
-
-    // Styles for the download button (originally #intro_button)
-    // Assuming .div_bouton is the container for the button
-    .div_bouton {
-        padding: 2px; // from .div_bouton class
-        border-radius: 10px; // from .div_bouton class
-        background-color: transparent; // Assuming no specific background for the container itself from original .div_bouton
-        margin: 10px; // from .div_bouton class
-
-        a#intro_button { // Targeting the <a> tag specifically
-            padding: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            color: white;
-            text-decoration: none;
-            background-color: var(--couleurnav); // THIS IS A CSS VARIABLE
-            cursor: pointer;
-            border-radius: 8px; // Explicitly set from nav a:hover example, as inherit might be tricky
-            max-width: 250px;
-            transition: scale 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-
-            &:hover {
-                scale: 1.05;
-                background-color: white;
-                color: black;
-            }
-
-            img {
-                max-height: 40px;
-                max-width: 40px;
-                margin-right: 8px;
-            }
-        }
-    }
-  }
+    color: white;
 }
-
-// Global fallbacks or definitions if variables are not available.
-// This is not ideal here, should be in a global stylesheet.
-// For example, if --couleurnav is not defined:
-// :host {
-//   --couleurnav: #00ABE4; // Default fallback
-// }
-// However, Angular's style encapsulation might make this tricky for :root vars.
-// It's better to ensure src/styles.scss has these :root variables.
+#conteneur_intro{
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(0,0,0,0.5);
+}
+#conteneur_intro>hr{
+    width: 60%;
+    display: block;
+}
+#intro_sous_div_txt{
+    width: 60%;
+    max-width: 1000px;
+}
+#intro_sous_div_txt>p{
+    text-align: center;
+}
+#img_moi{
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 100px;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+#intro_button{
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    background-color: var(--couleurnav);
+    cursor: pointer;
+    border-radius: inherit;
+    max-width: 250px;
+    transition: scale 0.3s ease;
+}
+#intro_button:hover {
+    scale: 1.05;
+    background-color: white;
+    color: black;
+}
+#intro_button img{
+    max-height: 40px;
+    max-width: 40px;
+    margin-right: 8px;
+}
+#intro h1 {
+    text-align: center;
+    font-size: 4em;
+}

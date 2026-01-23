@@ -1,90 +1,53 @@
-// Assuming --couleurtheme and --couleurdiv are globally defined.
-
-:host {
-  section#formation {
-    padding: 50px 2% 20px; // Standard section padding
+#formation{
     background-color: var(--couleurtheme);
     color: black;
     min-height: 450px;
-
-    h1 {
-      margin-top: 10px; // Standard h1 margin
-      text-align: center; // As per original "text-center" on container
-    }
-
-    #conteneur_formation {
-      // container-fluid and text-center are Bootstrap classes,
-      // so they should provide most of the container styling.
-      // No specific styles for #conteneur_formation itself in the original CSS other than class-based.
-    }
-
-    .div_formation { // This class is on an <a> tag
-      text-decoration: none;
-      color: black;
-      margin: 3%; // Original margin
-      padding: 20px;
-      // width: 44%; // Bootstrap 'col' class will manage width. Keeping this might conflict or be overridden.
-                     // If specific width is needed, might need to remove 'col' or adjust Bootstrap column classes.
-      border-radius: 10px;
-      background-color: var(--couleurdiv);
-      min-height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-direction: column;
-      transition: scale 0.3s ease;
-
-      &:hover {
-        scale: 1.05;
-        text-decoration: none; // Ensure hover doesn't add underline if not desired
-        color: black; // Maintain text color on hover
-      }
-
-      .nom_formation {
-        text-align: center;
-        // Consider font size and weight if needed
-      }
-
-      .lieu_formation {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        font-size: 15px;
-        text-align: left; // Ensure em text is aligned left within this flex container
-
-        em {
-            font-style: italic; // Ensure em is italic
-        }
-      }
-
-      .img_formation {
-        max-height: 50px;
-        background-color: white; // For images with transparency
-        padding: 5px;
-        margin-right: 20px;
-        // img-thumbnail is a Bootstrap class, providing border etc.
-      }
-
-      p {
-        text-align: justify; // Standard p styling
-        margin-bottom: 0; // Override default p margin if needed, as flex layout handles spacing
-      }
-    }
-  }
-
-  // Responsive adjustments for .div_formation if Bootstrap columns aren't enough
-  @media (max-width: 768px) { // Example breakpoint for Bootstrap 'col' behavior change (md)
-    section#formation {
-      .div_formation {
-        width: 90%; // Take more width on smaller screens if not using Bootstrap col-sm-X etc.
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px; // Add margin between stacked items
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-      }
-    }
-  }
+}
+.frise{
+    align-items: baseline;
+    padding-top: 20px;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+.frise-trait{
+    border-color: black;
+}
+.frise-date{
+    background-color: var(--couleurnav);
+    color: white;
+    border: solid black;
+    font-size: 18px;
+}
+.div_formation{
+    text-decoration: none;
+    color: black;
+    margin: 3%;
+    padding: 20px;
+    width: 44%;
+    border-radius: 10px;
+    background-color: var(--couleurdiv);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    transition: 0.3s ease;
+}
+.div_formation:hover{
+    scale: 1.05;
+}
+.nom_formation{
+    text-align: center;
+}
+.lieu_formation{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 15px;
+}
+.img_formation{
+    max-height: 50px;
+    background-color: white;
+    padding: 5px;
+    margin-right: 20px;
 }
