@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common'; // Import CommonModule for *ngFor etc.
-import { Skill, SkillService } from '../skill.service';
+import { Skill, SkillService } from './skill.service';
 
 @Component({
   selector: 'app-skills',

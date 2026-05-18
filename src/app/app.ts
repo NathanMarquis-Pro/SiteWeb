@@ -7,7 +7,7 @@ import { AboutComponent } from './about/about.component'; // Import AboutCompone
 import { EducationComponent } from './education/education.component'; // Import EducationComponent
 import { ProjectsComponent } from './projects/projects.component'; // Import ProjectsComponent
 import { ExperienceComponent } from './experience/experience.component'; // Import ExperienceComponent
-import { SkillComponent } from './skills/skill/skill.component'; // Import SkillComponent
+import { SkillComponent } from './skills/skill.component'; // Import SkillComponent
 
 @Component({
   selector: 'app-root',
