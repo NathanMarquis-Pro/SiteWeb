@@ -1,3 +1,4 @@
+@import '@tabler/icons-webfont/dist/tabler-icons.css';
 /*
 Cette page a été écrite de façon originale et est donc protégée par les droits d'auteur.
 Auteur : Nathan Marquis
@@ -65,4 +66,16 @@ a { color: var(--color-text-primary); text-decoration: none; }
 .pf { 
     font-family: 'DM Sans', sans-serif; 
     color: var(--color-text-primary); 
+}
+.section {
+    padding: 40px 32px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+.section-label {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
 }

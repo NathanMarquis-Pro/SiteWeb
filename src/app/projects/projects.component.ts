@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule for *ngFor
-import { Project, ProjectService } from './project.service';
+import { ProjectService } from './project.service';
+import { Project } from './project.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule], // Add CommonModule here
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  styleUrls: ['./projects.component.scss'],
+  imports: [CommonModule]
 })
+
 export class ProjectsComponent implements OnInit {
-  public projects: Project[] = [];
+  projects: Project[] = [];
 
   constructor(private projectService: ProjectService) {}
 
