@@ -40,16 +40,23 @@
     font-size: 13px; 
     font-weight: 500; 
     padding: 10px 20px; 
-    background: var(--color-text-primary); 
-    color: var(--color-background-primary); 
+    background: var(--color-text-primary);
     border-radius: var(--border-radius-md); 
-    border: none; cursor: pointer; 
+    border: none; cursor: pointer;
+    &:hover { 
+        background: var(--color-text-primary); 
+        opacity: 0.9; 
+    }
+}
+.btn-primary a { 
+    color: var(--color-background-primary); 
+    text-decoration: none; 
 }
 
 .btn-ghost { 
     font-size: 13px; 
     color: var(--color-text-secondary); 
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 .stack-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 36px; }

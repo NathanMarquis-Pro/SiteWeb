@@ -55,6 +55,7 @@ Auteur : Nathan Marquis
     --color-border-tertiary: rgba(0, 16, 112, 0.25);
     --border-radius-md: 8px;
 }
+a { color: var(--color-text-primary); text-decoration: none; }
 
 .pf * { 
     box-sizing: border-box; 
