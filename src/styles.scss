@@ -4,47 +4,64 @@ Auteur : Nathan Marquis
 */
 
 /*Vars*/
+// :root {
+//     --couleurnav: #00ABE4;
+//     --couleurtheme: #E9F1FA;
+//     --couleurdiv: rgba(0, 16, 112, 0.25);
+//     --couleurfooter: rgba(12, 15, 32, 0.82);
+// }
+
+// body{
+//     margin: 0;
+//     font-family: "Arial", serif;
+// }
+
+// /*Sections*/
+// section {
+//     padding: 50px 2% 20px;
+// }
+// p{
+//     text-align: justify;
+//     margin-bottom: 40px;
+// }
+// h1{
+//     margin-top: 10px;
+// }
+// hr{
+//     border-color: white;
+//     opacity: 1;
+// }
+
+// /*Classes*/
+// .text{
+//     font-size: 18px;
+// }
+// .text-size-60per{
+//     width: 60%;
+// }
+// .div_bouton{
+//     padding: 2px;
+//     border-radius: 10px;
+//     background-color: var(--couleurtheme);
+//     margin: 10px;
+// }
+// .border-div{
+//     border-radius: 20px;
+// }
 :root {
-    --couleurnav: #00ABE4;
-    --couleurtheme: #E9F1FA;
-    --couleurdiv: rgba(0, 16, 112, 0.25);
-    --couleurfooter: rgba(12, 15, 32, 0.82);
+    --color-background-primary: #ffffff;
+    --color-text-primary: #0C0F20;
+    --color-text-secondary: #4A4A4A;
+    --color-border-tertiary: rgba(0, 16, 112, 0.25);
+    --border-radius-md: 8px;
 }
 
-body{
-    margin: 0;
-    font-family: "Arial", serif;
+.pf * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
 }
-
-/*Sections*/
-section {
-    padding: 50px 2% 20px;
-}
-p{
-    text-align: justify;
-    margin-bottom: 40px;
-}
-h1{
-    margin-top: 10px;
-}
-hr{
-    border-color: white;
-    opacity: 1;
-}
-
-/*Classes*/
-.text{
-    font-size: 18px;
-}
-.text-size-60per{
-    width: 60%;
-}
-.div_bouton{
-    padding: 2px;
-    border-radius: 10px;
-    background-color: var(--couleurtheme);
-    margin: 10px;
-}
-.border-div{
-    border-radius: 20px;
+.pf { 
+    font-family: 'DM Sans', sans-serif; 
+    color: var(--color-text-primary); 
 }
