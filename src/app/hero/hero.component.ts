@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 
 @Component({
-  selector: 'app-intro',
+  selector: 'app-hero',
   standalone: true,
   imports: [
     NgOptimizedImage
   ],
-  templateUrl: './intro.component.html',
-  styleUrls: ['./intro.component.scss']
+  templateUrl: './hero.component.html',
+  styleUrls: ['./hero.component.scss']
 })
-export class IntroComponent {
+export class HeroComponent {
 
 }
