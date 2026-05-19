@@ -6,10 +6,10 @@
         <div class="timeline-dot"></div>
         <p class="timeline-date">{{ edu.period }}</p>
         <p class="timeline-title">{{ edu.degree }}</p>
-        <p class="timeline-school">
+        <a class="timeline-school" [href]="edu.link" target="_blank">
           <img [src]="edu.schoolLogo" class="school-img">
           {{ edu.school }}
-        </p>
+        </a>
         <p class="timeline-desc">{{ edu.description }}</p>
         <div class="timeline-tags">
           @for (tag of edu.tags; track tag) {

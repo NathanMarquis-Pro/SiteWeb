@@ -40,6 +40,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  &:hover {
+    transform: scale(0.99);
+    transition: 0.5s;
+  }
 }
 
 .school-img {
