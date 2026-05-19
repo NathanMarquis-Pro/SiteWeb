@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface Skill {
-  name: string;
-  imageUrls: string[]; // Array to accommodate single or multiple images
-  altTexts: string[]; // Corresponding alt texts for images
-  // category?: string; // Optional: if we decide to categorize them later
-}
+import { Skill } from './skill.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,43 +9,35 @@ export class SkillService {
   private skillsData: Skill[] = [
     {
       name: 'Langage Objet (Java)',
-      imageUrls: ['assets/competences/logo_Java.svg'],
-      altTexts: ['Java logo']
+      icons: ['assets/skills/logo_Java.svg']
     },
     {
       name: 'Versioning (Git, GitLab)',
-      imageUrls: ['assets/competences/logo_Git.png', 'assets/competences/logo_GitLab.png'],
-      altTexts: ['Git logo', 'GitLab logo']
+      icons: ['assets/skills/logo_Git.png', 'assets/skills/logo_GitLab.png']
     },
     {
       name: 'Web (HTML, CSS)',
-      imageUrls: ['assets/competences/logo_HTML.png', 'assets/competences/logo_CSS.png'],
-      altTexts: ['HTML logo', 'CSS logo']
+      icons: ['assets/skills/logo_HTML.png', 'assets/skills/logo_CSS.png']
     },
     {
       name: 'Graphique, Prototypage', // JavaFX & Figma
-      imageUrls: ['assets/competences/logo_JavaFX.png', 'assets/competences/logo_Figma.png'],
-      altTexts: ['JavaFX logo', 'Figma logo']
+      icons: ['assets/skills/logo_JavaFX.png', 'assets/skills/logo_Figma.png']
     },
     {
       name: 'SQL (Postgresql, SQLite)', // SQL & Postgre
-      imageUrls: ['assets/competences/logo_SQL.png', 'assets/competences/logo_Postgre.png'],
-      altTexts: ['SQL logo', 'PostgreSQL logo']
+      icons: ['assets/skills/logo_SQL.png', 'assets/skills/logo_Postgre.png']
     },
     {
       name: 'Bas niveau (C)',
-      imageUrls: ['assets/competences/logo_C.svg'],
-      altTexts: ['C language logo']
+      icons: ['assets/skills/logo_C.svg']
     },
     {
       name: 'Suite office', // Office & Office Apps
-      imageUrls: ['assets/competences/logo_Office.png', 'assets/competences/logo_Office_Apps.webp'],
-      altTexts: ['Microsoft Office logo', 'Office Apps logo']
+      icons: ['assets/skills/logo_Office.png', 'assets/skills/logo_Office_Apps.webp']
     },
     {
       name: 'Markdown',
-      imageUrls: ['assets/competences/logo_Markdown.png'],
-      altTexts: ['Markdown logo']
+      icons: ['assets/skills/logo_Markdown.png']
     }
   ];
 

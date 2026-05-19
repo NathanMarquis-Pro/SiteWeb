@@ -1,115 +1,23 @@
-// Assuming --couleurtheme and --couleurdiv are globally defined.
 /*Compétences*/
-#competences{
-    background-color: var(--couleurtheme);
+.skills-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-.element_competence{
-    margin: 20px;
-    padding: 5px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.card-img-top-competences{
-    position: inherit;
-    max-width: 150px;
-    max-height: 150px;
-    padding: 10px;
-}
-.card-body-competences{
-    display: flex;
-    align-items: flex-end;
-}
-.card-header-competences{
-    background-color: var(--couleurdiv);
-    min-height: 100px;
-    width: 100%;
-}
-.img_html_css{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
-}
-.card{
-    position: inherit;
-}
-/*:host {
 
-  section#competences {
-    padding: 50px 2% 20px; // Standard section padding
-    background-color: var(--couleurtheme); // CSS Variable for background
-    // text-center is a Bootstrap class already on the section in HTML
+.skill-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  padding: 7px 14px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: 20px;
+  background: var(--color-background-secondary);
 
-    h1 {
-      margin-top: 10px; // Standard h1 margin
-      margin-bottom: 30px; // More space before the skill cards start
-    }
-
-    .row {
-      // Standard Bootstrap row behavior
-      margin-bottom: 20px; // Add some space between rows of cards
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .element_competence { // This class is on the .card itself, which is also a .col
-      margin: 10px; // Reduced margin as .col might have padding. Original was 20px.
-      padding: 5px;
-      border-radius: 20px; // Override Bootstrap's card border-radius
-      // display: flex; // .col is already display: flex. Avoid conflict.
-      // justify-content: space-around; // Content within card, not for the card itself as a col.
-      // align-items: center; // Content within card.
-      // Bootstrap .card and .col handle flex behavior for layout.
-      // Internal content of the card should be structured for flex if needed.
-      // For the card itself to be centered or spaced, it's handled by .row properties.
-      // min-height: 350px; // Ensure cards have a similar height for visual consistency
-
-      .card-img-top-competences {
-        // position: inherit; // Default is static, inherit is unusual. Let's rely on default flow.
-        max-width: 100px;  // Reduced from 150px to fit better if multiple images
-        max-height: 100px; // Reduced from 150px
-        padding: 10px;
-        object-fit: contain; // Ensure images scale nicely without cropping
-        margin-left: auto; // Center single images if not in a flex container
-        margin-right: auto;
-      }
-
-      // Container for multiple images like HTML/CSS or Git/GitLab
-      .img_html_css, .d-flex { // .d-flex is the generic wrapper I added
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-direction: row;
-        padding: 10px 0; // Add some padding around these multi-image containers
-        min-height: 120px; // (max-height + padding) to reserve space
-      }
-
-      .card-body-competences {
-        display: flex;
-        flex-direction: column; // Stack title properly
-        align-items: center;   // Center title
-        justify-content: flex-end; // Push title to bottom
-        flex-grow: 1; // Allow card body to grow
-        padding: 0.5rem; // Smaller padding for card body
-      }
-
-      .card-header-competences { // This is on the h5.card-title
-        background-color: var(--couleurdiv); // CSS Variable
-        min-height: 80px; // Reduced from 100px
-        width: 100%;
-        padding: 10px; // Add padding to the "header"
-        border-radius: 10px; // Rounded corners for the "header"
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center; // Ensure text within is centered
-        font-size: 1rem; // Adjust font size as needed
-        color: black; // Ensure text color is appropriate for the background
-      }
-    }
+  .skill-img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
   }
 }
-*/

@@ -1,22 +1,13 @@
-<section id="competences" class="text-center">
-    <h1>Mes Compétences</h1>
-    <div class="row">
-      @for (skill of skills; track skill.name){
-        <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card element_competence h-100">
-            @for (imageUrl of skill.imageUrls; track imageUrl){
-            <div class="img-container d-flex justify-content-around align-items-center p-2" >
-                <img ngSrc="{{imageUrl}}"
-                     class="card-img-top card-img-top-competences"
-                     [alt]="skill.altTexts[0] || skill.name" fill>
-            </div>
-            }
-            <div class="card-body card-body-competences">
-              <h5 class="card-title card-header card-header-competences">{{ skill.name }}</h5>
-            </div>
-          </div>
-        </div>
-      }
-
-    </div>
+<section id= "skills" class="section">
+  <p class="section-label">Mes Compétences</p>
+  <div class="skills-row">
+    @for (skill of skills; track skill.name) {
+    <span class="skill-pill">
+     @for (icon of skill.icons; track icon) {
+          <img [src]="icon" alt="" class="skill-img">
+        }
+        {{ skill.name }}
+    </span>
+    }
+  </div>
 </section>
