@@ -1,20 +1,35 @@
-#contact{
-    background-color: var(--couleurfooter);
-    color: white;
+#contact {
+  border-bottom: none;
 }
-.gird-element{
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
+
+.contact-row {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
 }
-.gird-element:hover {
-    cursor: pointer;
+
+.contact-big {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
 }
-.img_contact{
-    width: 40px;
-    margin-left: 20px;
+
+.contact-links {
+  display: flex;
+  gap: 12px;
+}
+
+.contact-link {
+  font-size: 15px;
+  padding: 7px 14px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+
+  i {
+    font-size:17px; 
+    vertical-align:-2px
+  }
 }

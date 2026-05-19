@@ -1,4 +1,5 @@
 @import '@tabler/icons-webfont/dist/tabler-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
 /*
 Cette page a été écrite de façon originale et est donc protégée par les droits d'auteur.
 Auteur : Nathan Marquis
@@ -67,6 +68,7 @@ a { color: var(--color-text-primary); text-decoration: none; }
     font-family: 'DM Sans', sans-serif; 
     color: var(--color-text-primary); 
 }
+.serif { font-family: 'DM Serif Display', serif; }
 .section {
     padding: 40px 32px;
     border-bottom: 0.5px solid var(--color-border-tertiary);
