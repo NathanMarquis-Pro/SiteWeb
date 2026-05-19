@@ -1,15 +1,22 @@
-<section id="formation">
-    <h1>Ma Formation</h1>
-    <div class="container-fluid text-center" id="conteneur_formation">
-        <div class="row">
-            <a *ngFor="let item of educationItems" [href]="item.link" target="_blank" class="div_formation container-sm col">
-                <h4 class="nom_formation">{{ item.dates }} : {{ item.name }}</h4>
-                <h5 class="lieu_formation">
-                    <img class="img_formation img-thumbnail" [src]="item.institutionLogoUrl" [alt]="item.altText">
-                    <em>{{ item.institution }}</em>
-                </h5>
-                <p>{{ item.description }}</p>
-            </a>
+<section class="section">
+  <p class="section-label">Formation</p>
+  <div class="timeline">
+    @for (edu of educations; track edu.degree) {
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">{{ edu.period }}</p>
+        <p class="timeline-title">{{ edu.degree }}</p>
+        <p class="timeline-school">
+          <img [src]="edu.schoolLogo" class="school-img">
+          {{ edu.school }}
+        </p>
+        <p class="timeline-desc">{{ edu.description }}</p>
+        <div class="timeline-tags">
+          @for (tag of edu.tags; track tag) {
+            <span class="timeline-tag">{{ tag }}</span>
+          }
         </div>
-    </div>
+      </div>
+    }
+  </div>
 </section>

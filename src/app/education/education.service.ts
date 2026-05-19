@@ -1,47 +1,35 @@
 import { Injectable } from '@angular/core';
-
-export interface EducationItem {
-  id: string;
-  name: string;
-  institution: string;
-  institutionLogoUrl: string;
-  altText: string;
-  dates: string; // Could be more structured if needed (e.g., startDate, endDate)
-  description: string;
-  link: string; // URL to the institution or program
-}
+import { Education } from './education.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EducationService {
 
-  private educationHistoryData: EducationItem[] = [
+  private educationHistoryData: Education[] = [
     {
-      id: 'but_info',
-      name: 'BUT Informatique - Parcours A : réalisation d\'applications',
-      institution: 'IUT de Lille - Villeneuve-d\'Ascq',
-      institutionLogoUrl: 'assets/logo_iut_lille_coupe.png',
-      altText: 'Logo IUT de Lille',
-      dates: '2023 - 2026',
-      description: "Le BUT Informatique parcours A, réalisation d'applications : conception, développement, validation, est principalement axé sur la professionnalisation et il permet d'apprendre les compétences techniques et méthodologiques utiles et nécessaires à un développeur.",
-      link: 'https://www.univ-lille.fr/formations/fr-00082372'
+      period: '2023 - 2026',
+      degree: 'BUT Informatique - Parcours A : réalisation d\'applications',
+      school: 'IUT de Lille - Villeneuve-d\'Ascq',
+      schoolLogo: 'assets/education/logo_iut_lille_coupe.png',
+      description: "Le parcours A, réalisation d'applications : conception, développement, validation permet d'apprendre les compétences techniques et méthodologiques utiles à un développeur comme l\'algorithmique, les bases de données, le développement web et la gestion de projets. Stage de 10 semaines en entreprise.",
+      link: 'https://www.univ-lille.fr/formations/fr-00082372',
+      tags: ['Algorithmique', 'Réseaux', 'Bases de données', 'Développement web', 'Gestion de projet', 'Documentation technique', 'Tests unitaires']
     },
     {
-      id: 'bac_sti2d',
-      name: 'Baccalauréat technologique STI2D en spécialisation SIN : mention TB',
-      institution: 'Lycée Elisa Lemonnier - Douai',
-      institutionLogoUrl: 'assets/logo_Elisa_Lemonnier.png',
-      altText: 'Logo Lycée Elisa Lemonnier',
-      dates: '2020 - 2023',
-      description: "Le Baccalauréat technologique STI2D (sciences et technologies de l'industrie et du développement durable) est construit autour de l'innovation technologique, des sciences et de l'information. La spécialisation SIN apporte les compétences nécessaires pour développer des solutions intégrées et mesurer leurs performances environnementales.",
-      link: 'https://www.lycee-elisalemonnier.fr/site/nos-formations/'
+      period: '2020 - 2023',
+      degree: 'Baccalauréat technologique STI2D en spécialisation SIN',
+      school: 'Lycée Elisa Lemonnier - Douai',
+      schoolLogo: 'assets/education/logo_Elisa_Lemonnier.png',
+      description: "Obtenu avec mention, le Baccalauréat technologique STI2D est construit autour de l'innovation technologique et des sciences. La spécialisation SIN est orientée vers les systèmes d'information et numériques, couvrant des domaines tels que les réseaux, la programmation, l'électronique et les systèmes embarqués.",
+      link: 'https://www.lycee-elisalemonnier.fr/site/nos-formations/',
+      tags: ['Mention TB', 'Réseaux', 'Programmation', 'Électronique', 'Systèmes embarqués']
     }
   ];
 
   constructor() { }
 
-  getEducationHistory(): EducationItem[] {
+  getEducationHistory(): Education[] {
     return this.educationHistoryData;
   }
 }
