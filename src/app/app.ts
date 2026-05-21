@@ -6,7 +6,7 @@ import { HeroComponent } from './hero/hero.component'; // Import IntroComponent
 import { AboutComponent } from './about/about.component'; // Import AboutComponent
 import { EducationComponent } from './education/education.component'; // Import EducationComponent
 import { ProjectsComponent } from './projects/projects.component'; // Import ProjectsComponent
-import { ExperienceComponent } from './experience/experience.component'; // Import ExperienceComponent
+import { ExperienceComponent } from './experiences/experience.component'; // Import ExperienceComponent
 import { SkillComponent } from './skills/skill.component'; // Import SkillComponent
 
 @Component({

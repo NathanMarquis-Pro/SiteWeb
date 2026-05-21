@@ -1,12 +1,8 @@
-.timeline-school {
+.timeline-company {
   font-size: 15px;
   color: var(--color-text-secondary);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 6px;
-  &:hover {
-    transform: scale(0.99);
-    transition: 0.5s;
-  }
 }

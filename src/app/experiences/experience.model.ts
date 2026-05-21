@@ -1,8 +1,8 @@
 export interface Experience {
     period: string;
-    jobTitle: string;
-    enterprise: string;
-    enterpriseLogo: string;
+    role: string;
+    company: string;
+    companyLogo: string;
     description: string;
     tags: string[];
 }
