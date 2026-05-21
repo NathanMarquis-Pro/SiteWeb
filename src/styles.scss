@@ -1,0 +1,150 @@
+@import '@tabler/icons-webfont/dist/tabler-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+/*
+Cette page a été écrite de façon originale et est donc protégée par les droits d'auteur.
+Auteur : Nathan Marquis
+*/
+
+/*Vars*/
+// :root {
+//     --couleurnav: #00ABE4;
+//     --couleurtheme: #E9F1FA;
+//     --couleurdiv: rgba(0, 16, 112, 0.25);
+//     --couleurfooter: rgba(12, 15, 32, 0.82);
+// }
+
+// body{
+//     margin: 0;
+//     font-family: "Arial", serif;
+// }
+
+// /*Sections*/
+// section {
+//     padding: 50px 2% 20px;
+// }
+// p{
+//     text-align: justify;
+//     margin-bottom: 40px;
+// }
+// h1{
+//     margin-top: 10px;
+// }
+// hr{
+//     border-color: white;
+//     opacity: 1;
+// }
+
+// /*Classes*/
+// .text{
+//     font-size: 18px;
+// }
+// .text-size-60per{
+//     width: 60%;
+// }
+// .div_bouton{
+//     padding: 2px;
+//     border-radius: 10px;
+//     background-color: var(--couleurtheme);
+//     margin: 10px;
+// }
+// .border-div{
+//     border-radius: 20px;
+// }
+:root {
+    --color-background-primary: #ffffff;
+    --color-text-primary: #0C0F20;
+    --color-text-secondary: #4A4A4A;
+    --color-border-tertiary: rgba(0, 16, 112, 0.25);
+    --border-radius-md: 8px;
+}
+a { color: var(--color-text-primary); text-decoration: none; }
+
+.pf * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+.pf { 
+    font-family: 'DM Sans', sans-serif; 
+    color: var(--color-text-primary); 
+}
+.serif { font-family: 'DM Serif Display', serif; }
+.section {
+    padding: 40px 32px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+.section-label {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+}
+
+//Timeline elements
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  border-left: 0.5px solid var(--color-border-tertiary, #ddd);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 36px 28px;
+
+  &:last-child { padding-bottom: 0; }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.timeline-date {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.timeline-title { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+
+.timeline-img {
+  width: 80px;
+  height: 60px;
+  object-fit: contain;
+  padding: 4px 8px;
+  border: 0.5px solid var(--color-border-tertiary, #ddd);
+  border-radius: 20%;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.timeline-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.timeline-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 0.5px solid var(--color-border-tertiary, #ddd);
+  border-radius: 20px;
+  color: var(--color-text-secondary);
+}

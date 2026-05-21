@@ -1,0 +1,13 @@
+<section id= "skills" class="section">
+  <p class="section-label">Mes Compétences</p>
+  <div class="skills-row">
+    @for (skill of skills; track skill.name) {
+    <span class="skill-pill">
+     @for (icon of skill.icons; track icon) {
+          <img [src]="icon" alt="" class="skill-img">
+        }
+        {{ skill.name }}
+    </span>
+    }
+  </div>
+</section>

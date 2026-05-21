@@ -1,0 +1,23 @@
+/*Compétences*/
+.skills-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skill-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  padding: 7px 14px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: 20px;
+  background: var(--color-background-secondary);
+
+  .skill-img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+  }
+}

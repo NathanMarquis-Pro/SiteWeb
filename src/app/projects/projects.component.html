@@ -1,0 +1,20 @@
+<section id="projects" class="section">
+    <p class="section-label">Mes Projets</p>
+    <div class="projects-grid">
+        <div *ngFor="let project of projects" class="proj-card">
+            <div class="proj-card-top">
+                <div class="proj-icon">
+                    <i class="ti {{ project.icon }}" aria-hidden="true"></i>
+                </div>
+                <a [href]="project.link" target="_blank" class="proj-arrow">
+                    <i class="ti ti-arrow-up-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            <p class="proj-title">{{ project.title }}</p>
+            <p class="proj-desc">{{ project.description }}</p>
+            <div class="proj-tags">
+                <span class="proj-tag" *ngFor="let tag of project.tags">{{ tag }}</span>
+            </div>
+        </div>
+    </div>
+</section>

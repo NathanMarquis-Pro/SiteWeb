@@ -1,0 +1,35 @@
+#contact {
+  border-bottom: none;
+}
+
+.contact-row {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-big {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.contact-links {
+  display: flex;
+  gap: 12px;
+}
+
+.contact-link {
+  font-size: 15px;
+  padding: 7px 14px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+
+  i {
+    font-size:17px; 
+    vertical-align:-2px
+  }
+}
