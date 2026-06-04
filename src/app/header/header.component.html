@@ -1,13 +1,18 @@
 <header>
     <nav class="navbar">
         <div class="nav-logo">Nathan Marquis</div>
-        <div class="nav-links">
-            <a href="#about">À propos</a>
-            <a href="#education">Formation</a>
-            <a href="#experiences">Expériences</a>
-            <a href="#projects">Projets</a>
-            <a href="#skills">Compétences</a>
-            <a href="#contact">Contact</a>
+
+        <button class="menu" (click)="toggleMenu()" aria-label="Menu">
+            <i class="ti" [class.ti-menu-2]="!isMenuOpen" [class.ti-x]="isMenuOpen" aria-hidden="true"></i>
+        </button>
+
+        <div class="nav-links" [class.open]="isMenuOpen">
+            <a href="#about" (click)="closeMenu()">À propos</a>
+            <a href="#education" (click)="closeMenu()">Formation</a>
+            <a href="#experiences" (click)="closeMenu()">Expériences</a>
+            <a href="#projects" (click)="closeMenu()">Projets</a>
+            <a href="#skills" (click)="closeMenu()">Compétences</a>
+            <a href="#contact" (click)="closeMenu()">Contact</a>
         </div>
     </nav>
 </header>

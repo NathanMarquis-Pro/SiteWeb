@@ -8,37 +8,110 @@ export class SkillService {
 
   private skillsData: Skill[] = [
     {
-      name: 'Langage Objet (Java)',
+      name: 'Java',
       icons: ['assets/skills/logo_Java.svg']
     },
     {
-      name: 'Versioning (Git, GitLab)',
-      icons: ['assets/skills/logo_Git.png', 'assets/skills/logo_GitLab.png']
+      name: 'Git',
+      icons: ['assets/skills/logo_Git.png']
     },
     {
-      name: 'Web (HTML, CSS)',
-      icons: ['assets/skills/logo_HTML.png', 'assets/skills/logo_CSS.png']
+      name: 'GitLab',
+      icons: ['assets/skills/logo_GitLab.png']
     },
     {
-      name: 'Graphique, Prototypage', // JavaFX & Figma
-      icons: ['assets/skills/logo_JavaFX.png', 'assets/skills/logo_Figma.png']
+      name: 'GitHub',
+      icons: ['assets/skills/logo_GitHub.svg']
     },
     {
-      name: 'SQL (Postgresql, SQLite)', // SQL & Postgre
-      icons: ['assets/skills/logo_SQL.png', 'assets/skills/logo_Postgre.png']
+      name: 'HTML',
+      icons: ['assets/skills/logo_HTML.png']
     },
     {
-      name: 'Bas niveau (C)',
+      name: 'CSS',
+      icons: ['assets/skills/logo_CSS.png']
+    },
+    {
+      name: 'JavaFX',
+      icons: ['assets/skills/logo_JavaFX.png']
+    },
+    {
+      name: 'Figma',
+      icons: ['assets/skills/logo_Figma.png']
+    },
+    {
+      name: 'PostgreSQL',
+      icons: ['assets/skills/logo_PostgreSQL.png']
+    },
+    {
+      name: 'SQLite',
+      icons: ['assets/skills/logo_SQLite.png']
+    },
+    {
+      name: 'C',
       icons: ['assets/skills/logo_C.svg']
     },
     {
-      name: 'Suite office', // Office & Office Apps
-      icons: ['assets/skills/logo_Office.png', 'assets/skills/logo_Office_Apps.webp']
+      name: 'Office',
+      icons: ['assets/skills/logo_Office.png']
     },
     {
       name: 'Markdown',
       icons: ['assets/skills/logo_Markdown.png']
+    },
+    {
+      name: 'Angular',
+      icons: ['assets/skills/logo_Angular.png']
+    },
+    {
+      name: 'Spring Boot',
+      icons: ['assets/skills/logo_Spring_Boot.png']
+    },
+    {
+      name: 'JavaScript',
+      icons: ['assets/skills/logo_JavaScript.png']
+    },
+    {
+      name: 'TypeScript',
+      icons: ['assets/skills/logo_TypeScript.png']
+    },
+    {
+      name: 'Docker',
+      icons: ['assets/skills/logo_Docker.svg']
+    },
+    {
+      name: 'REST API',
+      icons: []
+    },
+    {
+      name: 'Playwright',
+      icons: ['assets/skills/logo_Playwright.png']
+    },
+    {
+      name: 'CI/CD',
+      icons: []
+    },
+    {
+      name: 'JEE',
+      icons: ['assets/skills/logo_JEE.png']
+    },
+    {
+      name: 'JDBC',
+      icons: ['assets/skills/logo_JDBC.svg']
+    },
+    {
+      name: 'Bash',
+      icons: ['assets/skills/logo_Bash.png']
+    },
+    {
+      name: 'Jira',
+      icons: ['assets/skills/logo_Jira.png']
+    },
+    {
+      name:'Anglais',
+      icons: ['assets/skills/logo_TOEIC.png']
     }
+
   ];
 
   constructor() { }

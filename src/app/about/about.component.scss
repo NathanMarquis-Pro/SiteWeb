@@ -4,6 +4,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   align-items: start;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .about-text {
