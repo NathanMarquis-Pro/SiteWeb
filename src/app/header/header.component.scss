@@ -5,7 +5,8 @@
     transition: 0.7s;
 }
 .navbar { 
-    display: flex; 
+    display: flex;
+    position: relative;
     justify-content: space-between; 
     align-items: center; 
     padding: 15px 32px; 
@@ -28,4 +29,45 @@
     color: var(--color-text-secondary); 
     text-decoration: none;
     padding: 4px;
+}
+
+.menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--color-text-primary);
+  padding: 4px;
+}
+
+@media (max-width: 768px) {
+
+  .menu {
+    display: block; // visible sur mobile
+  }
+
+  .nav-links {
+    display: none; // caché par défaut
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-background-primary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    padding: 8px 0;
+
+    a {
+      padding: 12px 32px;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+
+      &:last-child { border-bottom: none; }
+    }
+
+    &.open {
+      display: flex;
+    }
+  }
 }
