@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": ".",
   "projects": {
-    "portfolio": {
+    "SiteWeb": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -55,10 +55,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "portfolio:build:production"
+              "buildTarget": "SiteWeb:build:production"
             },
             "development": {
-              "buildTarget": "portfolio:build:development"
+              "buildTarget": "SiteWeb:build:development"
             }
           },
           "defaultConfiguration": "development"
