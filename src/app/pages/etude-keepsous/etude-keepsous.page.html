@@ -85,23 +85,23 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">{{ e.imprevus.exemple.colonnes.appareil }}</th>
+              <th scope="col" class="min-w-[9rem]">{{ e.imprevus.exemple.colonnes.appareil }}</th>
+              <th scope="col" class="w-32 min-w-32 text-right whitespace-normal">{{ e.imprevus.exemple.colonnes.parMois }}</th>
               <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.vie }}</th>
               <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.cout }}</th>
               <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.cagnotte }}</th>
               <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.mois }}</th>
-              <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.parMois }}</th>
             </tr>
           </thead>
           <tbody>
             @for (a of appareils; track a.id) {
               <tr>
                 <th scope="row" class="font-normal">{{ e.imprevus.exemple.appareils[a.id].nom }}</th>
+                <td class="text-right font-semibold tabular-nums whitespace-nowrap">{{ euros(a.parMoisCents, 2) }}</td>
                 <td class="text-right tabular-nums whitespace-nowrap">{{ e.imprevus.exemple.appareils[a.id].vie ?? pourcent(a.vieUtilisee) }}</td>
                 <td class="text-right tabular-nums whitespace-nowrap">{{ euros(a.coutCents) }}</td>
                 <td class="text-right tabular-nums whitespace-nowrap">{{ euros(a.cagnotteCents) }}</td>
                 <td class="text-right tabular-nums">{{ langue.nombre(a.moisRestants) }}</td>
-                <td class="text-right font-semibold tabular-nums whitespace-nowrap">{{ euros(a.parMoisCents, 2) }}</td>
               </tr>
             }
           </tbody>
