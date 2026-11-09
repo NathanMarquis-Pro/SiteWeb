@@ -13,7 +13,7 @@
             <p class="mt-1 max-w-prose text-base text-base-content/80">
               {{ item.texte }}
               @if (item.lien) {
-                <a class="link link-primary" [href]="habitude.cible">{{ item.lien }}</a>
+                <a class="link link-primary" [href]="langue.lien(habitude.cible)">{{ item.lien }}</a>
               }
             </p>
           </div>

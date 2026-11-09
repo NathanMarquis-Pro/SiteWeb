@@ -1,28 +1,29 @@
 <header class="sticky top-0 z-50 border-b border-base-300 bg-base-100">
   <nav class="navbar conteneur">
     <div class="navbar-start">
-      <a href="#haut" class="text-lg font-medium">Nathan Marquis</a>
+      <a [href]="langue.lien('#haut')" class="text-lg font-medium">Nathan Marquis</a>
     </div>
     <div class="navbar-end items-center gap-2">
       <ul class="menu menu-horizontal hidden flex-nowrap items-center whitespace-nowrap lg:flex">
         @for (lien of liensNav; track lien.cle) {
-          <li><a [href]="lien.href">{{ t().nav[lien.cle] }}</a></li>
+          <li><a [href]="langue.lien(lien.href)">{{ t().nav[lien.cle] }}</a></li>
         }
       </ul>
       <div class="join" role="group" [attr.aria-label]="t().nav.langue">
-        <button type="button" class="btn btn-xs join-item" [class.btn-primary]="langue.lang() === 'fr'" [attr.aria-pressed]="langue.lang() === 'fr'" (click)="langue.setLang('fr')">FR</button>
-        <button type="button" class="btn btn-xs join-item" [class.btn-primary]="langue.lang() === 'en'" [attr.aria-pressed]="langue.lang() === 'en'" (click)="langue.setLang('en')">EN</button>
+        @for (l of langues; track l) {
+          <a class="btn btn-xs join-item" [href]="langue.lienLangue(l)" [attr.hreflang]="l" [attr.lang]="l" [class.btn-primary]="langue.lang() === l" [attr.aria-current]="langue.lang() === l ? 'true' : null" (click)="langue.memoriser(l)" (auxclick)="langue.memoriser(l)">{{ l.toUpperCase() }}</a>
+        }
       </div>
-      <a href="#contact" class="btn btn-primary btn-sm hidden sm:inline-flex">{{ t().nav.contact }}</a>
+      <a [href]="langue.lien('#contact')" class="btn btn-primary btn-sm hidden sm:inline-flex">{{ t().nav.contact }}</a>
       <div class="dropdown dropdown-end lg:hidden">
         <button type="button" class="btn btn-ghost btn-square" [attr.aria-label]="t().nav.ouvrirMenu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
         </button>
         <ul class="menu dropdown-content bg-base-100 rounded-box border border-base-300 w-56 p-2 [&_a]:py-3">
           @for (lien of liensNav; track lien.cle) {
-            <li><a [href]="lien.href">{{ t().nav[lien.cle] }}</a></li>
+            <li><a [href]="langue.lien(lien.href)">{{ t().nav[lien.cle] }}</a></li>
           }
-          <li><a href="#contact">{{ t().nav.contact }}</a></li>
+          <li><a [href]="langue.lien('#contact')">{{ t().nav.contact }}</a></li>
         </ul>
       </div>
     </div>

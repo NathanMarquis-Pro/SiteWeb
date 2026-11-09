@@ -10,6 +10,7 @@ import { LIENS } from '../../shared/liens';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent {
-  protected readonly t = inject(LanguageService).t;
+  protected readonly langue = inject(LanguageService);
+  protected readonly t = this.langue.t;
   protected readonly liens = LIENS;
 }

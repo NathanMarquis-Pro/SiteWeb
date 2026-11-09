@@ -8,6 +8,7 @@ import { HABITUDES } from './methode.data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MethodeComponent {
-  protected readonly t = inject(LanguageService).t;
+  protected readonly langue = inject(LanguageService);
+  protected readonly t = this.langue.t;
   protected readonly habitudes = HABITUDES;
 }

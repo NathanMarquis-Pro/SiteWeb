@@ -10,7 +10,7 @@ export type GroupeCompetencesId = 'ia' | 'qualite' | 'web';
 
 // Une clé est ajoutée ici à chaque section (nutriscope, imsa…).
 export interface Translations {
-  meta: { titre: string; description: string };
+  meta: { titre: string; poste: string; description: string };
   nav: Record<NavCle, string> & {
     contact: string;
     langue: string;

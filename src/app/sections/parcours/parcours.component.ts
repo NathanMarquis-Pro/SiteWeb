@@ -8,7 +8,8 @@ import { ETAPE_EN_COURS, ETAPES_PARCOURS } from './parcours.data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ParcoursComponent {
-  protected readonly t = inject(LanguageService).t;
+  protected readonly langue = inject(LanguageService);
+  protected readonly t = this.langue.t;
   protected readonly etapes = ETAPES_PARCOURS;
   protected readonly enCours = ETAPE_EN_COURS;
 }

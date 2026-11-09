@@ -3,6 +3,7 @@ import { Translations } from './translations';
 export const en: Translations = {
   meta: {
     titre: 'Nathan Marquis · AI Developer',
+    poste: 'AI Developer',
     description:
       'Trainee AI developer (level 6 qualification, March 2027). NutriScope, data cleaning, automated testing. Internship from January 2027, permanent role from March, Lille area.',
   },

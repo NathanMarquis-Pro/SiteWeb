@@ -18,7 +18,7 @@
                 @if (item.lien) {
                   <a
                     class="link link-primary mt-3 inline-block"
-                    [href]="etape.href"
+                    [href]="langue.lien(etape.href)"
                     [attr.target]="etape.externe ? '_blank' : null"
                     [attr.rel]="etape.externe ? 'noopener' : null"
                   >{{ item.lien }}</a>

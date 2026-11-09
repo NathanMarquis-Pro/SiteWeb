@@ -1,28 +1,37 @@
-import { DOCUMENT } from '@angular/common';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser, PlatformLocation } from '@angular/common';
+import { computed, effect, inject, Injectable, InjectionToken, PLATFORM_ID, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { en } from './en';
 import { fr } from './fr';
+import { appliquerSeo } from './seo';
 import { Langue } from './translations';
 
-const CLE_STOCKAGE = 'langue';
+/** Clé de `localStorage` lue par `public/langue.js` (redirection depuis la racine). */
+export const CLE_STOCKAGE = 'langue';
 
-function lireLangueStockee(): Langue {
-  try {
-    const v = localStorage.getItem(CLE_STOCKAGE);
-    return v === 'fr' || v === 'en' ? v : 'fr';
-  } catch {
-    return 'fr';
-  }
+/** Langue d'une URL : `…/en` ou `…/en/` → anglais, tout le reste → français. */
+export function langueDepuisChemin(chemin: string): Langue {
+  return /\/en\/?$/.test(chemin) ? 'en' : 'fr';
 }
+
+/**
+ * Langue de la page, déduite de l'URL et non de `localStorage` : le serveur (pré-rendu) et le
+ * navigateur obtiennent le même résultat, donc l'hydratation ne voit aucun écart.
+ */
+export const LANGUE_INITIALE = new InjectionToken<Langue>('LANGUE_INITIALE', {
+  providedIn: 'root',
+  factory: () => langueDepuisChemin(inject(PlatformLocation).pathname),
+});
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly doc = inject(DOCUMENT);
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
+  private readonly navigateur = isPlatformBrowser(inject(PLATFORM_ID));
 
-  readonly lang = signal<Langue>(lireLangueStockee());
+  /** Langue de la page. Fixe : changer de langue, c'est changer d'URL (`/` ↔ `/en/`). */
+  readonly lang = signal<Langue>(inject(LANGUE_INITIALE)).asReadonly();
   readonly t = computed(() => (this.lang() === 'fr' ? fr : en));
   /** Locale `Intl` de la langue active. */
   readonly locale = computed(() => (this.lang() === 'fr' ? 'fr-FR' : 'en-US'));
@@ -32,11 +41,7 @@ export class LanguageService {
   constructor() {
     effect(() => {
       this.doc.documentElement.lang = this.lang();
-      const { titre, description } = this.t().meta;
-      this.title.setTitle(titre);
-      this.meta.updateTag({ name: 'description', content: description });
-      this.meta.updateTag({ property: 'og:title', content: titre });
-      this.meta.updateTag({ property: 'og:description', content: description });
+      appliquerSeo(this.doc, this.title, this.meta, this.lang(), this.t());
     });
   }
 
@@ -54,8 +59,22 @@ export class LanguageService {
     return formateur.format(valeur);
   }
 
-  setLang(l: Langue): void {
-    this.lang.set(l);
+  /**
+   * Lien interne. Le `<base href>` fait pointer `#imsa` vers la page française : en anglais,
+   * on préfixe `en/` pour rester sur `/en/#imsa`. Les liens externes sont rendus tels quels.
+   */
+  lien(href: string): string {
+    return href.startsWith('#') && this.lang() === 'en' ? `en/${href}` : href;
+  }
+
+  /** Lien vers la page d'une langue, relatif au `<base href>`. */
+  lienLangue(l: Langue): string {
+    return l === 'en' ? 'en/' : './';
+  }
+
+  /** Mémorise le choix de langue : `public/langue.js` le relit pour ne plus rediriger depuis `/`. */
+  memoriser(l: Langue): void {
+    if (!this.navigateur) return;
     try {
       localStorage.setItem(CLE_STOCKAGE, l);
     } catch {
