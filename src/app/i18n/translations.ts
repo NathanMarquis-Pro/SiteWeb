@@ -1,13 +1,17 @@
 export type Langue = 'fr' | 'en';
 
+/** Identifiants partagés entre les données (ordre, liens, logos) et les dictionnaires (textes). */
+export type NavCle = 'nutriscope' | 'imsa' | 'projets' | 'parcours';
+export type StatId = 'doublons' | 'inclassables' | 'vides';
+export type HabitudeId = 'verifier' | 'relancer' | 'transmettre';
+export type ProjetId = 'wine' | 'parcoursup' | 'kfinds' | 'universelille';
+export type EtapeId = 'bac' | 'dut' | 'imsa' | 'm2i';
+export type GroupeCompetencesId = 'ia' | 'qualite' | 'web';
+
 // Une clé est ajoutée ici à chaque section (nutriscope, imsa…).
 export interface Translations {
   meta: { titre: string; description: string };
-  nav: {
-    nutriscope: string;
-    imsa: string;
-    projets: string;
-    parcours: string;
+  nav: Record<NavCle, string> & {
     contact: string;
     langue: string;
     ouvrirMenu: string;
@@ -34,7 +38,7 @@ export interface Translations {
     p2: string;
     p3: string;
     alerte: string;
-    stats: { titre: string; desc: string }[];
+    stats: Record<StatId, { titre: string; desc: string }>;
     legendeAvant: string;
     legendeApres: string;
     boutonEtude: string;
@@ -55,25 +59,24 @@ export interface Translations {
   methode: {
     titre: string;
     intro: string;
-    items: { titre: string; texte: string; lien?: string }[];
+    habitudes: Record<HabitudeId, { titre: string; texte: string; lien?: string }>;
   };
   projets: {
     titre: string;
     moyenne: string;
     xgboost: string;
-    /** Indexé par identifiant de projet (voir data/projets.ts). */
-    liste: Record<string, { surtitre: string; description: string }>;
+    liste: Record<ProjetId, { surtitre: string; description: string }>;
   };
   parcours: {
     titre: string;
-    items: { date: string; titre: string; detail: string; lien?: string }[];
+    items: Record<EtapeId, { date: string; titre: string; detail: string; lien?: string }>;
   };
   competences: {
     titre: string;
     legendePleine: string;
     legendeVide: string;
     enCoursSr: string;
-    groupes: { ia: string; qualite: string; web: string; langues: string };
+    groupes: Record<GroupeCompetencesId | 'langues', string>;
     langues: string;
   };
   horsCode: { titre: string; texte: string };

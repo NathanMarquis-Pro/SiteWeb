@@ -25,6 +25,15 @@ describe('LanguageService', () => {
     expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toContain('Trainee AI developer');
   });
 
+  it('formate les nombres selon la langue', () => {
+    const s = TestBed.inject(LanguageService);
+    expect(s.nombre(1294426).replace(/\s/g, ' ')).toBe('1 294 426');
+    expect(s.nombre(0.4, 3)).toBe('0,400');
+    s.setLang('en');
+    expect(s.nombre(1294426)).toBe('1,294,426');
+    expect(s.nombre(0.4, 3)).toBe('0.400');
+  });
+
   it('relit la langue stockée', () => {
     TestBed.inject(LanguageService).setLang('en');
     TestBed.resetTestingModule();

@@ -24,6 +24,10 @@ export class LanguageService {
 
   readonly lang = signal<Langue>(lireLangueStockee());
   readonly t = computed(() => (this.lang() === 'fr' ? fr : en));
+  /** Locale `Intl` de la langue active. */
+  readonly locale = computed(() => (this.lang() === 'fr' ? 'fr-FR' : 'en-US'));
+
+  private readonly formateurs = new Map<string, Intl.NumberFormat>();
 
   constructor() {
     effect(() => {
@@ -34,6 +38,20 @@ export class LanguageService {
       this.meta.updateTag({ property: 'og:title', content: titre });
       this.meta.updateTag({ property: 'og:description', content: description });
     });
+  }
+
+  /** Formate un nombre selon la langue active : `1 294 426` en français, `1,294,426` en anglais. */
+  nombre(valeur: number, decimales = 0): string {
+    const cle = `${this.locale()}:${decimales}`;
+    let formateur = this.formateurs.get(cle);
+    if (!formateur) {
+      formateur = new Intl.NumberFormat(this.locale(), {
+        minimumFractionDigits: decimales,
+        maximumFractionDigits: decimales,
+      });
+      this.formateurs.set(cle, formateur);
+    }
+    return formateur.format(valeur);
   }
 
   setLang(l: Langue): void {

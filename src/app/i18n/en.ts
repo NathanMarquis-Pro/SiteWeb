@@ -48,11 +48,11 @@ export const en: Translations = {
     p3: 'I then split the data into Parquet files with DuckDB and prepared the feature file for the upcoming models.',
     alerte:
       "I don't make up missing nutrient values: I flag them. Filling them in now would bias the models; that has to happen after the train/test split.",
-    stats: [
-      { titre: 'Duplicates', desc: 'same barcode' },
-      { titre: 'Unclassifiable', desc: 'no category, no aisle' },
-      { titre: 'Empty', desc: 'no nutrients' },
-    ],
+    stats: {
+      doublons: { titre: 'Duplicates', desc: 'same barcode' },
+      inclassables: { titre: 'Unclassifiable', desc: 'no category, no aisle' },
+      vides: { titre: 'Empty', desc: 'no nutrients' },
+    },
     legendeAvant: 'Excerpt from ',
     legendeApres: ': every column gets an explicit decision, and an unknown decision stops the pipeline.',
     boutonEtude: 'Read the case study',
@@ -77,26 +77,26 @@ export const en: Translations = {
   methode: {
     titre: 'How I work',
     intro: 'Three habits picked up during my degree, my internship and my training, which I keep on every project.',
-    items: [
-      {
+    habitudes: {
+      verifier: {
         titre: 'I check before I believe.',
         texte:
           "You read everywhere that data preparation matters more than the algorithm. I tested it on a lab exercise: it's more nuanced, it depends on the model.",
         lien: 'See the Wine Quality exercise',
       },
-      {
+      relancer: {
         titre: 'I build things you can run again.',
         texte:
           'My Parcoursup script downloads the official data, checks the file, builds the database and cleans up after itself. One run, the same result every time.',
         lien: 'See the project',
       },
-      {
+      transmettre: {
         titre: 'I write for whoever takes over my code.',
         texte:
           'Test tools designed for the whole team at iMSA, an automatic report for every cleaning rule in NutriScope.',
         lien: 'See the internship',
       },
-    ],
+    },
   },
   projets: {
     titre: 'Other projects',
@@ -126,32 +126,32 @@ export const en: Translations = {
   },
   parcours: {
     titre: 'Background',
-    items: [
-      {
+    items: {
+      bac: {
         date: '2020 → 2023',
         titre: 'Technology baccalaureate (STI2D, IT and digital systems) · highest honours',
         detail: 'Lycée Elisa Lemonnier (formerly Edmond Labbé), Douai',
         lien: 'See the programme',
       },
-      {
+      dut: {
         date: '2023 → 2025',
         titre: 'DUT in Computer Science (2-year university degree)',
         detail: "IUT de Lille, Villeneuve-d'Ascq · application development track",
         lien: 'See the programme',
       },
-      {
+      imsa: {
         date: 'April → June 2025 · 10 weeks',
         titre: 'Full-stack developer internship, iMSA (Avelin)',
         detail: 'Angular, Spring Boot, Playwright · SAFe organisation',
         lien: '48 tests',
       },
-      {
+      m2i: {
         date: 'July 2026 → March 2027 · ongoing',
         titre: 'AI Developer professional qualification (French level 6)',
         detail: 'M2i · data, machine learning, deep learning, generative AI, deployment, GDPR',
         lien: 'NutriScope',
       },
-    ],
+    },
   },
   competences: {
     titre: 'What I use',

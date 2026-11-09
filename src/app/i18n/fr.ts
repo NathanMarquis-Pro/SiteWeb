@@ -48,11 +48,11 @@ export const fr: Translations = {
     p3: "J'ai ensuite découpé les données en fichiers Parquet avec DuckDB et préparé le fichier de features pour les futurs modèles.",
     alerte:
       "Je n'invente pas les nutriments manquants : je les signale. Les compléter maintenant fausserait les modèles, il faudra le faire après le découpage entraînement / test.",
-    stats: [
-      { titre: 'Doublons', desc: 'même code-barres' },
-      { titre: 'Inclassables', desc: 'ni catégorie, ni rayon' },
-      { titre: 'Vides', desc: 'aucun nutriment' },
-    ],
+    stats: {
+      doublons: { titre: 'Doublons', desc: 'même code-barres' },
+      inclassables: { titre: 'Inclassables', desc: 'ni catégorie, ni rayon' },
+      vides: { titre: 'Vides', desc: 'aucun nutriment' },
+    },
     legendeAvant: 'Extrait de ',
     legendeApres: ' : chaque colonne reçoit une décision explicite, et une décision inconnue arrête le pipeline.',
     boutonEtude: "Lire l'étude de cas",
@@ -77,26 +77,26 @@ export const fr: Translations = {
   methode: {
     titre: 'Comment je travaille',
     intro: 'Trois habitudes prises en BUT, en stage et en formation, que je garde sur chaque projet.',
-    items: [
-      {
+    habitudes: {
+      verifier: {
         titre: 'Je vérifie avant de croire.',
         texte:
           "On lit partout que la préparation des données compte plus que l'algorithme. Je l'ai testé sur un TP : c'est plus nuancé, ça dépend du modèle.",
         lien: 'Voir le TP Wine Quality',
       },
-      {
+      relancer: {
         titre: "Je fais des choses qu'on peut relancer.",
         texte:
           "Mon script Parcoursup télécharge les données officielles, vérifie le fichier, crée la base et nettoie derrière lui. Un seul lancement, le même résultat à chaque fois.",
         lien: 'Voir le projet',
       },
-      {
+      transmettre: {
         titre: "J'écris pour la personne qui reprendra mon code.",
         texte:
           "Des outils de test pensés pour toute l'équipe chez iMSA, un compte rendu automatique pour chaque règle de nettoyage dans NutriScope.",
         lien: 'Voir le stage',
       },
-    ],
+    },
   },
   projets: {
     titre: 'Autres projets',
@@ -126,32 +126,32 @@ export const fr: Translations = {
   },
   parcours: {
     titre: 'Parcours',
-    items: [
-      {
+    items: {
+      bac: {
         date: '2020 → 2023',
         titre: 'Bac STI2D, spécialité SIN · mention Très Bien',
         detail: 'Lycée Elisa Lemonnier (ex-Edmond Labbé), Douai',
         lien: 'Voir la formation',
       },
-      {
+      dut: {
         date: '2023 → 2025',
         titre: 'DUT Informatique (2 années de BUT)',
         detail: "IUT de Lille, Villeneuve-d'Ascq · parcours Réalisation d'applications",
         lien: 'Voir la formation',
       },
-      {
+      imsa: {
         date: 'Avril → juin 2025 · 10 semaines',
         titre: 'Stage développeur full stack, iMSA (Avelin)',
         detail: 'Angular, Spring Boot, Playwright · organisation SAFe',
         lien: '48 tests',
       },
-      {
+      m2i: {
         date: 'Juillet 2026 → mars 2027 · en cours',
         titre: 'Titre professionnel Développeur IA (RNCP niveau 6)',
         detail: 'M2i · données, Machine Learning, Deep Learning, IA générative, déploiement, RGPD',
         lien: 'NutriScope',
       },
-    ],
+    },
   },
   competences: {
     titre: "Ce que j'utilise",

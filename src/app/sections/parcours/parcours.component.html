@@ -1,0 +1,36 @@
+<section id="parcours" class="scroll-mt-20 border-t border-base-300">
+  <div class="conteneur py-20">
+    <h2 class="titre-section">{{ t().parcours.titre }}</h2>
+    <ul class="timeline timeline-vertical timeline-compact mt-6 lg:timeline-horizontal [&>li]:[--timeline-col-start:0.5rem] lg:[&>li]:[--timeline-row-start:0px]">
+      @for (etape of etapes; track etape.id) {
+        @let item = t().parcours.items[etape.id];
+        <li class="min-w-0 lg:flex-1">
+          <div class="timeline-middle" [class.text-success]="etape.id === enCours" [class.text-primary]="etape.id !== enCours">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle></svg>
+          </div>
+          <div class="timeline-end mb-8 w-full lg:mt-3 lg:mb-0 lg:self-stretch lg:pr-4">
+            <div class="timeline-box h-full shadow-none lg:flex lg:flex-col">
+              <img [src]="etape.logo" alt="" width="40" height="40" class="mb-3 h-10 w-auto self-start rounded-md object-contain">
+              <p class="text-lg leading-snug font-semibold">{{ item.titre }}</p>
+              <p class="mt-1 text-base-content/80">{{ item.detail }}</p>
+              <div class="mt-3 lg:mt-auto lg:pt-3">
+                <time class="block text-sm text-base-content/70">{{ item.date }}</time>
+                @if (item.lien) {
+                  <a
+                    class="link link-primary mt-3 inline-block"
+                    [href]="etape.href"
+                    [attr.target]="etape.externe ? '_blank' : null"
+                    [attr.rel]="etape.externe ? 'noopener' : null"
+                  >{{ item.lien }}</a>
+                }
+              </div>
+            </div>
+          </div>
+          @if (!$last) {
+            <hr class="bg-base-300" />
+          }
+        </li>
+      }
+    </ul>
+  </div>
+</section>
