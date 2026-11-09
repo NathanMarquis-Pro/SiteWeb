@@ -1,0 +1,8 @@
+# Les robots ne lisent robots.txt qu'à la racine d'un domaine. Sur github.io, seul
+# https://nathanmarquis-pro.github.io/robots.txt compte (dépôt « NathanMarquis-Pro.github.io ») :
+# ce fichier, servi sous /SiteWeb/, n'a d'effet qu'avec un domaine personnalisé.
+# En attendant, déclarer le sitemap dans la Search Console (voir README).
+User-agent: *
+Allow: /
+
+Sitemap: https://nathanmarquis-pro.github.io/SiteWeb/sitemap.xml
