@@ -2,7 +2,7 @@ export type Langue = 'fr' | 'en';
 
 // Une clé est ajoutée ici à chaque section (nutriscope, imsa…).
 export interface Translations {
-  meta: { titre: string };
+  meta: { titre: string; description: string };
   nav: {
     nutriscope: string;
     imsa: string;

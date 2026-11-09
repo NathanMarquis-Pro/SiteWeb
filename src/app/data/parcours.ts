@@ -15,11 +15,11 @@ export const ETAPES_PARCOURS: EtapeParcours[] = [
   },
   {
     logo: 'assets/education/logo_iut_lille_coupe.png',
-    href: 'https://www.univ-lille.fr/formations/fr-00082372',
+    href: 'https://formation.univ-lille.fr/fr/offre-de-formation/but-BUT/bachelor-universitaire-de-technologie-informatique-MG082352.html',
     externe: true,
   },
   { logo: 'assets/experiences/imsa.jpg', href: '#imsa' },
-  { href: '#nutriscope' }, // logo M2i : à fournir
+  { logo: 'assets/education/logo_m2i_320.jpg', href: '#nutriscope' },
 ];
 
 /** Index de l'étape en cours (point vert) : la dernière. */

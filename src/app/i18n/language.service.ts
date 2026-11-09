@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { en } from './en';
 import { fr } from './fr';
 import { Langue } from './translations';
@@ -20,6 +20,7 @@ function lireLangueStockee(): Langue {
 export class LanguageService {
   private readonly doc = inject(DOCUMENT);
   private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
 
   readonly lang = signal<Langue>(lireLangueStockee());
   readonly t = computed(() => (this.lang() === 'fr' ? fr : en));
@@ -27,7 +28,11 @@ export class LanguageService {
   constructor() {
     effect(() => {
       this.doc.documentElement.lang = this.lang();
-      this.title.setTitle(this.t().meta.titre);
+      const { titre, description } = this.t().meta;
+      this.title.setTitle(titre);
+      this.meta.updateTag({ name: 'description', content: description });
+      this.meta.updateTag({ property: 'og:title', content: titre });
+      this.meta.updateTag({ property: 'og:description', content: description });
     });
   }
 

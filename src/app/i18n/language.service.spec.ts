@@ -22,6 +22,7 @@ describe('LanguageService', () => {
     expect(s.t().meta.titre).toBe('Nathan Marquis · AI Developer');
     expect(document.documentElement.lang).toBe('en');
     expect(document.title).toBe('Nathan Marquis · AI Developer');
+    expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toContain('Trainee AI developer');
   });
 
   it('relit la langue stockée', () => {

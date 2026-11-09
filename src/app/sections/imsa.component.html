@@ -1,5 +1,5 @@
 <section id="imsa" class="conteneur scroll-mt-20 py-20">
-  <p class="text-base-content/60">{{ t().imsa.surtitre }}</p>
+  <p class="text-base-content/70">{{ t().imsa.surtitre }}</p>
   <h2 class="mt-2 max-w-[760px] font-serif text-[clamp(32px,4vw,46px)] leading-[1.12] font-normal text-primary">{{ t().imsa.titre }}</h2>
 
   <div class="mt-8 grid gap-10 lg:grid-cols-2">
@@ -10,11 +10,11 @@
     </div>
 
     <div class="grid min-w-0 gap-4 sm:grid-cols-2">
-      <div role="group" [attr.aria-label]="t().imsa.ariaAvant" class="min-w-0 overflow-x-auto rounded-box bg-neutral p-4 font-mono text-[11.5px] leading-relaxed text-neutral-content">
+      <div role="group" [attr.aria-label]="t().imsa.ariaAvant" tabindex="0" class="min-w-0 overflow-x-auto rounded-box bg-neutral p-4 font-mono text-[11.5px] leading-relaxed text-neutral-content">
         <span class="badge badge-sm mb-3">{{ t().imsa.badgeAvant }}</span>
         <pre>{{ codeAvant }}</pre>
       </div>
-      <div role="group" [attr.aria-label]="t().imsa.ariaApres" class="min-w-0 overflow-x-auto rounded-box border border-base-300 bg-base-100 p-4 font-mono text-[11.5px] leading-relaxed">
+      <div role="group" [attr.aria-label]="t().imsa.ariaApres" tabindex="0" class="min-w-0 overflow-x-auto rounded-box border border-base-300 bg-base-100 p-4 font-mono text-[11.5px] leading-relaxed">
         <span class="badge badge-soft badge-success badge-sm mb-3">{{ t().imsa.badgeApres }}</span>
         <pre>{{ codeApres }}</pre>
       </div>

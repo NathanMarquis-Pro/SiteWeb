@@ -1,7 +1,11 @@
 import { Translations } from './translations';
 
 export const fr: Translations = {
-  meta: { titre: 'Nathan Marquis · Développeur IA' },
+  meta: {
+    titre: 'Nathan Marquis · Développeur IA',
+    description:
+      'Développeur IA en formation (RNCP 6, mars 2027). NutriScope, nettoyage de données, tests automatisés. Stage dès janvier 2027, CDI dès mars, Lille.',
+  },
   nav: {
     nutriscope: 'NutriScope',
     imsa: 'Stage iMSA',

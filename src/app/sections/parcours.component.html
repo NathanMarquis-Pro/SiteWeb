@@ -10,7 +10,7 @@
           <div class="timeline-end mb-8 w-full lg:mt-3 lg:mb-0 lg:self-stretch lg:pr-4">
             <div class="timeline-box h-full shadow-none lg:flex lg:flex-col">
               @if (etapes[$index].logo) {
-                <img [src]="etapes[$index].logo" alt="" class="mb-3 h-10 w-auto self-start object-contain">
+                <img [src]="etapes[$index].logo" alt="" class="mb-3 h-10 w-auto self-start rounded-md object-contain">
               } @else {
                 <!-- Logo à fournir : emplacement vide -->
                 <div class="mb-3 h-10 w-10 self-start rounded-field border border-dashed border-base-300" aria-hidden="true"></div>
@@ -18,7 +18,7 @@
               <p class="text-lg leading-snug font-semibold">{{ item.titre }}</p>
               <p class="mt-1 text-base-content/80">{{ item.detail }}</p>
               <div class="mt-3 lg:mt-auto lg:pt-3">
-                <time class="block text-sm text-base-content/60">{{ item.date }}</time>
+                <time class="block text-sm text-base-content/70">{{ item.date }}</time>
                 @if (item.lien && etapes[$index].href) {
                   <a
                     class="link link-primary mt-3 inline-block"

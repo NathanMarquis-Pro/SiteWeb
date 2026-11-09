@@ -59,3 +59,19 @@
   max-width: 1360px;
   padding-inline: 1.5rem;
 }
+
+/* Accessibilité : focus visible sur les liens (les .btn gèrent le leur via DaisyUI) */
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+#contact a:focus-visible {
+  outline-color: var(--color-primary-content);
+}
+
+/* Cibles tactiles d'au moins 44 px sur mobile */
+@media (max-width: 639px) {
+  .btn {
+    min-height: 2.75rem;
+  }
+}
