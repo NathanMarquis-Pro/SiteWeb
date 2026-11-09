@@ -1,9 +1,9 @@
 export type Langue = 'fr' | 'en';
 /** Pages pré-rendues, chacune dans les deux langues. */
-export type PageId = 'accueil' | 'nutriscope';
+export type PageId = 'accueil' | 'nutriscope' | 'keepsous';
 
 /** Identifiants partagés entre les données (ordre, liens, logos) et les dictionnaires (textes). */
-export type NavCle = 'nutriscope' | 'imsa' | 'projets' | 'parcours';
+export type NavCle = 'nutriscope' | 'keepsous' | 'imsa' | 'projets' | 'parcours';
 export type StatId = 'doublons' | 'inclassables' | 'vides';
 export type HabitudeId = 'verifier' | 'relancer' | 'transmettre';
 export type ProjetId = 'wine' | 'parcoursup' | 'kfinds' | 'universelille';
@@ -30,6 +30,14 @@ export type RayonId =
   | 'bebes';
 export type RequeteId = 'agregat' | 'filtre' | 'marques';
 export type UsageId = 'api' | 'analyse' | 'ml';
+
+export type SectionKeepsousId = 'contexte' | 'ecrans' | 'imprevus' | 'previsions' | 'construction' | 'qualite' | 'ia' | 'difficultes' | 'suite';
+export type StatKeepsousId = 'tests' | 'endpoints' | 'adr';
+export type EcranId = 'accueil' | 'operations' | 'enveloppes' | 'imprevus' | 'previsions' | 'parametres';
+export type AppareilId = 'lavelinge' | 'voiture' | 'telephone';
+export type VerdictId = 'possible' | 'serre' | 'horsDePortee';
+export type MesureId = 'ecrans' | 'tables' | 'endpoints' | 'adr' | 'testsBack' | 'testsFront' | 'testsE2e' | 'themes' | 'commits';
+export type VisuelKeepsousId = 'accueil' | 'imprevus' | 'imprevusSombre' | 'imprevusMobile' | 'previsions';
 
 // Une clé est ajoutée ici à chaque section (nutriscope, imsa…).
 export interface Translations {
@@ -103,7 +111,9 @@ export interface Translations {
     langues: string;
   };
   horsCode: { titre: string; texte: string };
+  keepsous: KeepsousAccueil;
   etude: EtudeNutriscope;
+  etudeKeepsous: EtudeKeepsous;
   footer: { titre: string; texte: string; basDePage: string };
 }
 
@@ -162,4 +172,69 @@ export interface EtudeNutriscope {
   };
   limites: string[];
   suite: { paragraphe: string; boutonCode: string; credit: string };
+}
+
+/** Bloc KeepSous de l'accueil. Les chiffres vivent dans `keepsous.data.ts`. */
+export interface KeepsousAccueil {
+  surtitre: string;
+  titre: string;
+  intro: string;
+  jalons: { nom: string; date?: string }[];
+  h3: string;
+  p1: string;
+  p2: string;
+  p3: string;
+  alerte: string;
+  stats: Record<StatKeepsousId, { titre: string; desc: string }>;
+  legendeAvant: string;
+  legendeApres: string;
+  boutonEtude: string;
+  boutonCode: string;
+}
+
+/** Page d'étude de cas KeepSous. Les chiffres vivent dans `etude-keepsous.data.ts`, les textes ici. */
+export interface EtudeKeepsous {
+  meta: { titre: string; description: string };
+  retour: string;
+  surtitre: string;
+  titre: string;
+  intro: string;
+  fiche: { label: string; valeur: string }[];
+  sommaire: string;
+  sections: Record<SectionKeepsousId, string>;
+  contexte: string[];
+  ecrans: {
+    intro: string;
+    colonnes: { ecran: string; question: string };
+    liste: Record<EcranId, { nom: string; question: string }>;
+    themes: string;
+  };
+  imprevus: {
+    paragraphes: string[];
+    alerte: string;
+    exemple: {
+      colonnes: { appareil: string; vie: string; cout: string; cagnotte: string; mois: string; parMois: string };
+      appareils: Record<AppareilId, { nom: string; vie?: string }>;
+      legende: string;
+    };
+    legendeAvant: string;
+    legendeApres: string;
+  };
+  previsions: {
+    paragraphes: string[];
+    colonnes: { verdict: string; condition: string };
+    verdicts: Record<VerdictId, { nom: string; condition: string }>;
+  };
+  construction: string[];
+  qualite: {
+    paragraphes: string[];
+    colonnes: { mesure: string; valeur: string };
+    mesures: Record<MesureId, string>;
+    /** Compléments de valeur, par mesure (ex. « + connexion et hors ligne »). */
+    notes: Partial<Record<MesureId, string>>;
+  };
+  ia: string[];
+  difficultes: { intro: string; points: { titre: string; texte: string }[] };
+  suite: { paragraphe: string; boutonCode: string; credit: string };
+  visuels: Record<VisuelKeepsousId, { alt: string; legende: string }>;
 }

@@ -1,0 +1,61 @@
+<section id="keepsous" class="scroll-mt-20">
+  <div class="conteneur py-20">
+    <p class="surtitre">{{ t().keepsous.surtitre }}</p>
+    <h2 class="mt-2 font-serif text-[clamp(34px,4.4vw,52px)] leading-[1.1] font-normal text-primary">{{ t().keepsous.titre }}</h2>
+    <p class="mt-4 max-w-[720px] text-lg text-base-content/80">{{ t().keepsous.intro }}</p>
+
+    <ul class="steps steps-vertical md:steps-horizontal mt-10 w-full">
+      @for (jalon of t().keepsous.jalons; track $index) {
+        <li class="step" [class.step-primary]="$index < donnees.jalonsFaits">
+          <span class="text-left md:text-center">
+            {{ jalon.nom }}
+            @if (jalon.date) {
+              <span class="block text-xs text-base-content/70">{{ jalon.date }}</span>
+            }
+          </span>
+        </li>
+      }
+    </ul>
+
+    <div class="mt-16 grid gap-10 lg:grid-cols-2">
+      <div>
+        <h3 class="text-2xl font-semibold text-primary">{{ t().keepsous.h3 }}</h3>
+        <p class="mt-3.5 text-base-content/80">{{ t().keepsous.p1 }}</p>
+        <p class="mt-3.5 text-base-content/80">{{ t().keepsous.p2 }}</p>
+        <p class="mt-3.5 text-base-content/80">{{ t().keepsous.p3 }}</p>
+        <div role="note" class="alert alert-soft alert-success mt-6 items-start">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="mt-0.5 shrink-0"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg>
+          <span>{{ t().keepsous.alerte }}</span>
+        </div>
+      </div>
+
+      <div class="flex min-w-0 flex-col gap-5">
+        <div class="stats stats-vertical w-full border border-base-300 bg-base-100 sm:stats-horizontal">
+          @for (stat of donnees.stats; track stat.id) {
+            <div class="stat">
+              <div class="stat-title text-base-content/70">{{ t().keepsous.stats[stat.id].titre }}</div>
+              <div class="stat-value text-3xl text-primary">{{ langue.nombre(stat.valeur) }}</div>
+              <div class="stat-desc text-base-content/70">{{ t().keepsous.stats[stat.id].desc }}</div>
+            </div>
+          }
+        </div>
+
+        <figure>
+          <div class="mockup-code w-full text-sm" tabindex="0">
+            @for (ligne of donnees.code; track $index) {
+              <pre [attr.data-prefix]="$index + 1" [class.text-warning]="ligne.alerte"><code>{{ ligne.texte }}</code></pre>
+            }
+          </div>
+          <figcaption class="mt-2.5 text-sm text-base-content/70">
+            {{ t().keepsous.legendeAvant }}<code class="font-mono">{{ donnees.fonctionExtraite }}</code>{{ t().keepsous.legendeApres }}
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="mt-9 flex flex-wrap gap-3">
+      <a [href]="langue.lienEtude('keepsous')" class="btn btn-outline btn-primary">{{ t().keepsous.boutonEtude }}</a>
+      <a [href]="langue.lien('#contact')" class="btn btn-ghost">{{ t().keepsous.boutonCode }}</a>
+    </div>
+  </div>
+</section>

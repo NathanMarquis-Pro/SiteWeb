@@ -1,7 +1,7 @@
 /*
  * Redirection de langue depuis une page française, exécutée dans <head> avant le premier rendu
- * (aucun flash). `/` et `/nutriscope/` sont les pages françaises, `/en/` et `/en/nutriscope/` les
- * pages anglaises, toutes pré-rendues.
+ * (aucun flash). `/`, `/nutriscope/` et `/keepsous/` sont les pages françaises, `/en/`, `/en/nutriscope/` et
+ * `/en/keepsous/` les pages anglaises, toutes pré-rendues.
  *
  * On redirige vers la page anglaise correspondante seulement si :
  *  - on est sur une page française (jamais sur `/en/…` : un lien partagé vers `/en/` reste en anglais) ;
@@ -29,7 +29,8 @@
     var suffixe = (search || '') + (hash || '');
     if (pathname === base || pathname === base + 'index.html') return base + 'en/' + suffixe;
     var relatif = pathname.indexOf(base) === 0 ? pathname.slice(base.length) : '';
-    if (/^nutriscope(\/(index\.html)?)?$/.test(relatif)) return base + 'en/nutriscope/' + suffixe;
+    var page = /^(nutriscope|keepsous)(\/(index\.html)?)?$/.exec(relatif);
+    if (page) return base + 'en/' + page[1] + '/' + suffixe;
     return null;
   }
 

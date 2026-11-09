@@ -3,6 +3,7 @@ import { CompetencesComponent } from '../../sections/competences/competences.com
 import { HeroComponent } from '../../sections/hero/hero.component';
 import { HorsCodeComponent } from '../../sections/hors-code/hors-code.component';
 import { ImsaComponent } from '../../sections/imsa/imsa.component';
+import { KeepsousComponent } from '../../sections/keepsous/keepsous.component';
 import { MethodeComponent } from '../../sections/methode/methode.component';
 import { NutriscopeComponent } from '../../sections/nutriscope/nutriscope.component';
 import { ParcoursComponent } from '../../sections/parcours/parcours.component';
@@ -11,11 +12,12 @@ import { ProjetsComponent } from '../../sections/projets/projets.component';
 /** Page d'accueil : toutes les sections, reliées par des ancres. */
 @Component({
   selector: 'app-accueil',
-  imports: [HeroComponent, NutriscopeComponent, ImsaComponent, MethodeComponent, ProjetsComponent, ParcoursComponent, CompetencesComponent, HorsCodeComponent],
+  imports: [HeroComponent, NutriscopeComponent, KeepsousComponent, ImsaComponent, MethodeComponent, ProjetsComponent, ParcoursComponent, CompetencesComponent, HorsCodeComponent],
   template: `
     <main>
       <app-hero></app-hero>
       <app-nutriscope></app-nutriscope>
+      <app-keepsous></app-keepsous>
       <app-imsa></app-imsa>
       <app-methode></app-methode>
       <app-projets></app-projets>

@@ -121,6 +121,9 @@ describe('LanguageService', () => {
       ['/SiteWeb/en/', 'en'],
       ['/en/nutriscope', 'en'],
       ['/SiteWeb/en/nutriscope/', 'en'],
+      ['/en/keepsous', 'en'],
+      ['/SiteWeb/en/keepsous/', 'en'],
+      ['/SiteWeb/keepsous/', 'fr'],
       ['/SiteWeb/nutriscope/', 'fr'],
       ['/SiteWeb/entreprise', 'fr'],
       ['/context.html', 'fr'],
@@ -136,6 +139,8 @@ describe('LanguageService', () => {
       ['/SiteWeb/nutriscope', 'nutriscope'],
       ['/SiteWeb/nutriscope/', 'nutriscope'],
       ['/SiteWeb/en/nutriscope/', 'nutriscope'],
+      ['/SiteWeb/keepsous', 'keepsous'],
+      ['/SiteWeb/en/keepsous/', 'keepsous'],
       ['/SiteWeb/nutriscope-autre/', 'accueil'],
     ] as const) {
       expect(pageDepuisChemin(chemin)).withContext(chemin).toBe(attendu);
@@ -200,6 +205,44 @@ describe('LanguageService', () => {
       expect(en.lienLangue('en')).toBe('en/nutriscope/');
       expect(en.lienEtude()).toBe('en/nutriscope/');
       expect(en.ancreEtude('donnees')).toBe('en/nutriscope/#donnees');
+    });
+  });
+
+  describe('étude de cas KeepSous', () => {
+    const KS = { fr: `${SITE_URL}keepsous/`, en: `${SITE_URL}en/keepsous/` };
+
+    it('titre, description, canonical et hreflang de la page, dans chaque langue', () => {
+      const fr = creer('fr', 'keepsous');
+      expect(document.title).toBe(fr.t().etudeKeepsous.meta.titre);
+      expect(attr('meta[name="description"]', 'content')).toBe(fr.t().etudeKeepsous.meta.description);
+      expect(attr('link[rel="canonical"]', 'href')).toBe(KS.fr);
+      expect(attr('meta[property="og:type"]', 'content')).toBe('article');
+      creer('en', 'keepsous');
+      expect(document.title).toBe('KeepSous case study · Nathan Marquis');
+      expect(attr('link[rel="canonical"]', 'href')).toBe(KS.en);
+      expect(attr('link[rel="alternate"][hreflang="fr"]', 'href')).toBe(KS.fr);
+      expect(attr('link[rel="alternate"][hreflang="en"]', 'href')).toBe(KS.en);
+      expect(attr('link[rel="alternate"][hreflang="x-default"]', 'href')).toBe(KS.fr);
+    });
+
+    it('JSON-LD Article : titre, langue et URL', () => {
+      creer('en', 'keepsous');
+      const a = JSON.parse(document.head.querySelector('script[type="application/ld+json"]')!.textContent!);
+      expect(a['@type']).toBe('Article');
+      expect(a.headline).toBe('A budget that plans for the washing machine breaking down');
+      expect(a.inLanguage).toBe('en');
+      expect(a.url).toBe(KS.en);
+    });
+
+    it('le sélecteur de langue et les liens internes restent sur la bonne page', () => {
+      const fr = creer('fr', 'keepsous');
+      expect(fr.lienLangue('en')).toBe('en/keepsous/');
+      expect(fr.lienEtude('keepsous')).toBe('keepsous/');
+      expect(fr.ancreEtude('imprevus', 'keepsous')).toBe('keepsous/#imprevus');
+      const en = creer('en', 'keepsous');
+      expect(en.lienLangue('fr')).toBe('keepsous/');
+      expect(en.lienEtude('keepsous')).toBe('en/keepsous/');
+      expect(en.ancreEtude('imprevus', 'keepsous')).toBe('en/keepsous/#imprevus');
     });
   });
 });

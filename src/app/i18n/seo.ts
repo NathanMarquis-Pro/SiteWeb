@@ -7,7 +7,9 @@ import { Langue, PageId, Translations } from './translations';
 export const URL_PAGE: Record<Langue, string> = { fr: SITE_URL, en: `${SITE_URL}en/` };
 /** URL absolue de l'étude de cas NutriScope dans chaque langue. */
 export const URL_ETUDE: Record<Langue, string> = { fr: `${SITE_URL}nutriscope/`, en: `${SITE_URL}en/nutriscope/` };
-export const URLS: Record<PageId, Record<Langue, string>> = { accueil: URL_PAGE, nutriscope: URL_ETUDE };
+/** URL absolue de l'étude de cas KeepSous dans chaque langue. */
+export const URL_KEEPSOUS: Record<Langue, string> = { fr: `${SITE_URL}keepsous/`, en: `${SITE_URL}en/keepsous/` };
+export const URLS: Record<PageId, Record<Langue, string>> = { accueil: URL_PAGE, nutriscope: URL_ETUDE, keepsous: URL_KEEPSOUS };
 
 const LOCALE_OG: Record<Langue, string> = { fr: 'fr_FR', en: 'en_US' };
 const LANGUES: Langue[] = ['fr', 'en'];
@@ -30,16 +32,17 @@ export function jsonLdPersonne(lang: Langue, t: Translations): Record<string, un
   };
 }
 
-/** Données structurées `Article` de l'étude de cas : titre, description et auteur de la page. */
-export function jsonLdEtude(lang: Langue, t: Translations): Record<string, unknown> {
+/** Données structurées `Article` d'une étude de cas : titre, description et auteur de la page. */
+export function jsonLdEtude(lang: Langue, t: Translations, page: Exclude<PageId, 'accueil'> = 'nutriscope'): Record<string, unknown> {
+  const etude = page === 'keepsous' ? t.etudeKeepsous : t.etude;
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: t.etude.titre,
-    description: t.etude.meta.description,
+    headline: etude.titre,
+    description: etude.meta.description,
     inLanguage: lang,
-    url: URL_ETUDE[lang],
-    mainEntityOfPage: URL_ETUDE[lang],
+    url: URLS[page][lang],
+    mainEntityOfPage: URLS[page][lang],
     image: `${SITE_URL}assets/og-image.jpg`,
     author: { '@type': 'Person', name: 'Nathan Marquis', url: URL_PAGE[lang], sameAs: [LIENS.linkedin, LIENS.github] },
   };
@@ -61,7 +64,7 @@ function poser(doc: Document, tag: 'link' | 'script', selecteur: string, attrs: 
  * Exécuté aussi pendant le pré-rendu : ces balises se retrouvent dans le HTML statique.
  */
 export function appliquerSeo(doc: Document, title: Title, meta: Meta, lang: Langue, t: Translations, page: PageId = 'accueil'): void {
-  const { titre, description } = page === 'accueil' ? t.meta : t.etude.meta;
+  const { titre, description } = page === 'accueil' ? t.meta : page === 'keepsous' ? t.etudeKeepsous.meta : t.etude.meta;
   const url = URLS[page][lang];
   const autre = LANGUES.find((l) => l !== lang)!;
 
@@ -82,5 +85,5 @@ export function appliquerSeo(doc: Document, title: Title, meta: Meta, lang: Lang
     poser(doc, 'link', `link[rel="alternate"][hreflang="${l}"]`, { rel: 'alternate', hreflang: l, href: URLS[page][l] });
   }
   poser(doc, 'link', 'link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default', href: URLS[page].fr });
-  poser(doc, 'script', 'script[type="application/ld+json"]', { type: 'application/ld+json' }, JSON.stringify(page === 'accueil' ? jsonLdPersonne(lang, t) : jsonLdEtude(lang, t)));
+  poser(doc, 'script', 'script[type="application/ld+json"]', { type: 'application/ld+json' }, JSON.stringify(page === 'accueil' ? jsonLdPersonne(lang, t) : jsonLdEtude(lang, t, page)));
 }

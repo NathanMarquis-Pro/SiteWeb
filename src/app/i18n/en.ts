@@ -9,6 +9,7 @@ export const en: Translations = {
   },
   nav: {
     nutriscope: 'NutriScope',
+    keepsous: 'KeepSous',
     imsa: 'iMSA internship',
     projets: 'Projects',
     parcours: 'Background',
@@ -58,6 +59,59 @@ export const en: Translations = {
     legendeApres: ': every column gets an explicit decision, and an unknown decision stops the pipeline.',
     boutonEtude: 'Read the case study',
     boutonCode: 'See the code on GitHub',
+  },
+  keepsous: {
+    surtitre: "My side project",
+    titre: "KeepSous",
+    intro: "A budgeting app that I designed and host myself: six screens, a PostgreSQL database, 44 endpoints. What sets it apart: an unexpected-expense reserve that sets money aside device by device. Private code, app not published.",
+    jalons: [
+      {
+        nom: "Mockups and scoping",
+        date: "Oct. 2026",
+      },
+      {
+        nom: "Docker and CI foundations",
+        date: "Oct. 2026",
+      },
+      {
+        nom: "Version 1: 10 features",
+        date: "Oct. 2026",
+      },
+      {
+        nom: "Version 1.1 improvements",
+        date: "Nov. 2026",
+      },
+      {
+        nom: "Login, mobile, device funds",
+        date: "Nov. 2026",
+      },
+      {
+        nom: "Finishing touches",
+      },
+    ],
+    h3: "One fund per device, not a single global reserve",
+    p1: "A washing machine lasts ten years, a phone three. A single reserve mixes everything up. KeepSous gives each device its own fund, computed from its lifespan and its replacement cost.",
+    p2: "Each month, the app works out how much to set aside: what is missing to replace the device, divided by the months left before its end of life. For a car, the end of life also takes mileage into account.",
+    p3: "The other idea, in the forecasts: simulate a purchase (in cash, in 3 or 12 instalments) to see the effect on the end-of-month balance before paying.",
+    alerte: "Every amount is stored as whole cents, rounded up for the funds: better to set aside one cent too many than one too few.",
+    stats: {
+      tests: {
+        titre: "Tests",
+        desc: "back end and front end, e2e not included",
+      },
+      endpoints: {
+        titre: "Endpoints",
+        desc: "FastAPI API",
+      },
+      adr: {
+        titre: "Decisions",
+        desc: "architecture decisions on record",
+      },
+    },
+    legendeAvant: "Excerpt from ",
+    legendeApres: ": the monthly sum is what is missing, divided by the months left, rounded up to the next cent.",
+    boutonEtude: "Read the case study",
+    boutonCode: "Private code, demo on request",
   },
   imsa: {
     surtitre: 'Internship · iMSA, April to June 2025',
@@ -362,6 +416,225 @@ export const en: Translations = {
         'The catalogue is ready. Next step on the data side: split into training and test sets, then impute the missing nutrients inside the model pipeline rather than upstream. Machine learning, deep learning, the RAG assistant and deployment come after that.',
       boutonCode: 'See the code on GitHub',
       credit: 'Data: © Open Food Facts contributors, ODbL licence for the database and CC-BY-SA for the images.',
+    },
+  },
+  etudeKeepsous: {
+    meta: {
+      titre: "KeepSous case study · Nathan Marquis",
+      description: "KeepSous: a self-hosted budgeting app with one fund per device for unexpected expenses and a purchase simulation in the forecasts.",
+    },
+    retour: "Back to portfolio",
+    surtitre: "Case study · KeepSous",
+    titre: "A budget that plans for the washing machine breaking down",
+    intro: "KeepSous is the budgeting app I use at home. I designed, built and host it on my own. Here is what it does, what sets it apart from a typical app, how I built it and what I learned.",
+    fiche: [
+      {
+        label: "My part",
+        valeur: "Everything: design, back end, front end, deployment",
+      },
+      {
+        label: "Setting",
+        valeur: "Personal project, solo",
+      },
+      {
+        label: "Duration",
+        valeur: "4 weeks, since October 2026",
+      },
+      {
+        label: "Tools",
+        valeur: "Next.js, TypeScript, FastAPI, PostgreSQL, Docker, GitHub Actions, Claude Code",
+      },
+    ],
+    sommaire: "Case study contents",
+    sections: {
+      contexte: "The project and why",
+      ecrans: "Six screens, one thread",
+      imprevus: "Unexpected expenses: one fund per device",
+      previsions: "Forecasts: can I afford this purchase?",
+      construction: "How it is built",
+      qualite: "What keeps the code honest",
+      ia: "How I worked with AI",
+      difficultes: "Difficulties and lessons",
+      suite: "What's next",
+    },
+    contexte: [
+      "KeepSous is a budgeting app for one person or one household. It is for estimating and planning ahead, not for replacing the bank: you enter your transactions, sort them into categories and see what is left to live on.",
+      "It runs at home, in Docker, and only listens on the local machine. I open it on my phone as an installed app (PWA) through Tailscale. It is not published and its code is private: I can show it in a demo.",
+      "I started from six screen mockups, in three themes, then split the work into tasks. Version 1 came in October 2026, followed by two rounds of improvements in November: password login, mobile, and per-device funds.",
+    ],
+    ecrans: {
+      intro: "Each screen answers one simple question.",
+      colonnes: {
+        ecran: "Screen",
+        question: "Question it answers",
+      },
+      liste: {
+        accueil: {
+          nom: "Home",
+          question: "Where do I stand this month?",
+        },
+        operations: {
+          nom: "Transactions",
+          question: "What did I spend, and where?",
+        },
+        enveloppes: {
+          nom: "Envelopes",
+          question: "Am I keeping to my caps for each category?",
+        },
+        imprevus: {
+          nom: "Unexpected",
+          question: "How much should I set aside to replace my devices?",
+        },
+        previsions: {
+          nom: "Forecasts",
+          question: "What will my balance look like, and can I afford this purchase?",
+        },
+        parametres: {
+          nom: "Settings",
+          question: "How do I set up the app and import or export my data?",
+        },
+      },
+      themes: "Three themes ship with it: light green, light red and dark green.",
+    },
+    imprevus: {
+      paragraphes: [
+        "The first version had a single reserve for all unexpected expenses. It said how much to set aside, but not what for. I replaced it with one fund per device (architecture decision no. 22).",
+        "Each device has a type (household, vehicle, phone and IT, multimedia, housing, miscellaneous), a purchase date, a lifespan and a replacement cost. The app derives its end of life, the share of life already used and a failure risk level: low below 60%, medium below 85%, high above that.",
+        "The monthly sum is what is missing to replace the device, divided by the months left, rounded up to the next cent. For a vehicle, the end of life is whichever comes first: age or extrapolated mileage. A device past its end of life is \"on borrowed time\": it stays in the budget, with one month left to fill its fund.",
+      ],
+      alerte: "When the budget is tight, the app fills the funds in priority order and shows whether each one is covered, partly covered or not covered, along with the total shortfall.",
+      exemple: {
+        colonnes: {
+          appareil: "Device",
+          vie: "Life used",
+          cout: "Cost",
+          cagnotte: "Already in the fund",
+          mois: "Months left",
+          parMois: "To set aside this month",
+        },
+        appareils: {
+          lavelinge: {
+            nom: "Washing machine",
+          },
+          voiture: {
+            nom: "Car, 150,000 of 250,000 km",
+          },
+          telephone: {
+            nom: "Phone on borrowed time",
+            vie: "100% or more",
+          },
+        },
+        legende: "Fictional devices and amounts.",
+      },
+      legendeAvant: "Excerpt from ",
+      legendeApres: ": the monthly sum is what is missing, divided by the months left, rounded up to the next cent.",
+    },
+    previsions: {
+      paragraphes: [
+        "The Forecasts screen extrapolates the balance for the coming months. It includes a purchase simulator: you pick a purchase (television, computer, holidays, car) or a free amount, and pay in cash, in 3 or in 12 instalments.",
+        "The simulated end-of-month balance is the starting balance, plus income, minus expenses, minus the first instalment. There are three scenarios: current figures, a tighter month (+20% spending) or a lighter one (−20%).",
+        "The amount is split into whole cents: later instalments are rounded down and the first one absorbs the remainder. The simulation runs in the browser: nothing is sent to the server or stored.",
+      ],
+      colonnes: {
+        verdict: "Verdict",
+        condition: "Condition",
+      },
+      verdicts: {
+        possible: {
+          nom: "Possible",
+          condition: "The simulated balance stays above the safety margin",
+        },
+        serre: {
+          nom: "Tight",
+          condition: "The simulated balance stays positive, but below the margin",
+        },
+        horsDePortee: {
+          nom: "Unaffordable",
+          condition: "The simulated balance drops below zero",
+        },
+      },
+    },
+    construction: [
+      "The front end is Next.js (strict TypeScript, Tailwind, daisyUI). The back end is FastAPI, with a 9-table PostgreSQL database. The browser calls /api/* on Next.js, which forwards to the back end: no CORS to manage.",
+      "Each feature has its own folder on the back end (routes, schemas, service, models). The TypeScript types are generated from FastAPI's OpenAPI contract: if the back end changes, the front end stops compiling until it is updated.",
+      "Amounts are integers in cents, always positive: the category gives the direction (expense or income). The schema is written in SQL by hand, with numbered patches tracked in a table.",
+      "Everything runs in Docker. A single Makefile drives the project on Linux and on Windows (PowerShell). A daily database backup is scheduled, and restoring it is tested.",
+    ],
+    qualite: {
+      paragraphes: [
+        "The project has 462 back-end tests and 372 front-end tests, plus 19 end-to-end scenarios (Playwright) that run on a throwaway Docker stack.",
+        "GitHub Actions CI runs two jobs in parallel on every push: the full check (lint, typing, tests, API contract) and the end-to-end tests.",
+        "The fund formulas exist on the back end (Python) and on the front end (live preview). Tests check that both give the same results.",
+        "Every structural choice is written down as an architecture decision: there are 23, from \"amounts in cents\" to \"Python dependencies managed by uv\".",
+      ],
+      colonnes: {
+        mesure: "Measure",
+        valeur: "Value",
+      },
+      mesures: {
+        ecrans: "Screens",
+        tables: "SQL tables",
+        endpoints: "FastAPI endpoints",
+        adr: "Architecture decisions",
+        testsBack: "Back-end tests",
+        testsFront: "Front-end tests",
+        testsE2e: "End-to-end tests",
+        themes: "Themes",
+        commits: "Commits",
+      },
+      notes: {
+        ecrans: "+ login and offline",
+        commits: "13 Oct to 9 Nov 2026",
+      },
+    },
+    ia: [
+      "I used Claude Code to write a large part of the code. My role: design the screens, decide the architecture, split the work into tasks and review.",
+      "To steer the AI, I wrote an architecture document with explicit rules for it, one sheet per feature, architecture decisions and two style guides (back end and front end). Lint and test runs are delegated to a dedicated agent.",
+      "The safeguards are the tests, the typing and the CI: a change only goes through if everything is green. What I do not delegate: the choice of calculation rules and the decision to replace the global reserve with one fund per device.",
+    ],
+    difficultes: {
+      intro: "TO BE WRITTEN BY NATHAN: 2 or 3 difficulties, each with what I learned from it.",
+      points: [
+        {
+          titre: "TO BE WRITTEN BY NATHAN",
+          texte: "TO BE WRITTEN BY NATHAN",
+        },
+        {
+          titre: "TO BE WRITTEN BY NATHAN",
+          texte: "TO BE WRITTEN BY NATHAN",
+        },
+        {
+          titre: "TO BE WRITTEN BY NATHAN",
+          texte: "TO BE WRITTEN BY NATHAN",
+        },
+      ],
+    },
+    suite: {
+      paragraphe: "Version 1 is finished and in use. A few finishing touches remain: testing the phone install and the rendering at 375 px. The next ideas are written down, not started: savings goals and importing bank statements from CSV.",
+      boutonCode: "Private code, demo on request",
+      credit: "Mockups and screenshots: fictional data.",
+    },
+    visuels: {
+      accueil: {
+        alt: "KeepSous home screen in the light green theme: the month's remaining budget and a summary of transactions, with fictional data.",
+        legende: "Fictional data.",
+      },
+      imprevus: {
+        alt: "Unexpected screen in the light green theme: one fund per device, with the failure risk level and the sum to set aside this month.",
+        legende: "Fictional data.",
+      },
+      imprevusSombre: {
+        alt: "The same Unexpected screen in the dark green theme.",
+        legende: "Same screen in the dark green theme. Fictional data.",
+      },
+      imprevusMobile: {
+        alt: "KeepSous Unexpected screen on a phone, in the light green theme: the list of devices with their funds, with fictional data.",
+        legende: "Unexpected screen on a phone (PWA). Fictional data.",
+      },
+      previsions: {
+        alt: "Forecasts screen with the purchase simulator: a purchase paid in 3 instalments and its verdict on the end-of-month balance.",
+        legende: "Fictional data.",
+      },
     },
   },
   footer: {

@@ -68,6 +68,13 @@ describe('langue.js', () => {
       expect(lib().cheminRedirection('/nutriscope/', '/')).toBe('/en/nutriscope/');
     });
 
+    it("cible /en/keepsous/ depuis l'étude de cas KeepSous", () => {
+      expect(lib().cheminRedirection('/SiteWeb/keepsous/', '/SiteWeb/')).toBe('/SiteWeb/en/keepsous/');
+      expect(lib().cheminRedirection('/SiteWeb/keepsous', '/SiteWeb/')).toBe('/SiteWeb/en/keepsous/');
+      expect(lib().cheminRedirection('/SiteWeb/keepsous/', '/SiteWeb/', '', '#imprevus')).toBe('/SiteWeb/en/keepsous/#imprevus');
+      expect(lib().cheminRedirection('/SiteWeb/en/keepsous/', '/SiteWeb/')).toBeNull();
+    });
+
     it('ne redirige pas hors des pages françaises', () => {
       expect(lib().cheminRedirection('/SiteWeb/en/nutriscope/', '/SiteWeb/')).toBeNull();
       expect(lib().cheminRedirection('/SiteWeb/nutriscope-autre/', '/SiteWeb/')).toBeNull();

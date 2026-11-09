@@ -9,6 +9,7 @@ export const fr: Translations = {
   },
   nav: {
     nutriscope: 'NutriScope',
+    keepsous: 'KeepSous',
     imsa: 'Stage iMSA',
     projets: 'Projets',
     parcours: 'Parcours',
@@ -58,6 +59,59 @@ export const fr: Translations = {
     legendeApres: ' : chaque colonne reçoit une décision explicite, et une décision inconnue arrête le pipeline.',
     boutonEtude: "Lire l'étude de cas",
     boutonCode: 'Voir le code sur GitHub',
+  },
+  keepsous: {
+    surtitre: "Mon projet personnel",
+    titre: "KeepSous",
+    intro: "Une application de gestion de budget que j'ai conçue et que j'héberge moi-même : six écrans, une base PostgreSQL, 44 endpoints. Sa particularité : une réserve d'imprévus qui met de l'argent de côté appareil par appareil. Code privé, application non publiée.",
+    jalons: [
+      {
+        nom: "Maquettes et cadrage",
+        date: "oct. 2026",
+      },
+      {
+        nom: "Socle Docker et CI",
+        date: "oct. 2026",
+      },
+      {
+        nom: "Version 1 : 10 fonctionnalités",
+        date: "oct. 2026",
+      },
+      {
+        nom: "Améliorations v1.1",
+        date: "nov. 2026",
+      },
+      {
+        nom: "Connexion, mobile, cagnottes",
+        date: "nov. 2026",
+      },
+      {
+        nom: "Finitions",
+      },
+    ],
+    h3: "Une cagnotte par appareil, pas une réserve globale",
+    p1: "Un lave-linge dure dix ans, un téléphone trois. Une réserve unique mélange tout. KeepSous donne à chaque appareil sa cagnotte, calculée à partir de sa durée de vie et du coût de remplacement.",
+    p2: "Chaque mois, l'application calcule la somme à mettre de côté : ce qui manque pour remplacer l'appareil, divisé par les mois restants avant sa fin de vie. Pour une voiture, la fin de vie tient aussi compte du kilométrage.",
+    p3: "L'autre idée, dans les prévisions : simuler un achat (comptant, en 3 ou 12 fois) pour voir l'effet sur le solde de fin de mois avant de payer.",
+    alerte: "Tous les montants sont des centimes entiers, arrondis vers le haut pour les cagnottes : mieux vaut mettre un centime de trop de côté qu'un centime de moins.",
+    stats: {
+      tests: {
+        titre: "Tests",
+        desc: "back et front, sans compter les e2e",
+      },
+      endpoints: {
+        titre: "Endpoints",
+        desc: "API FastAPI",
+      },
+      adr: {
+        titre: "Décisions",
+        desc: "d'architecture documentées",
+      },
+    },
+    legendeAvant: "Extrait de ",
+    legendeApres: " : la somme mensuelle est ce qui manque, divisé par les mois restants, arrondi au centime supérieur.",
+    boutonEtude: "Lire l'étude de cas",
+    boutonCode: "Code privé, démo sur demande",
   },
   imsa: {
     surtitre: 'Stage · iMSA, avril à juin 2025',
@@ -362,6 +416,225 @@ export const fr: Translations = {
         "Le catalogue est prêt. Prochaine étape côté données : découper en entraînement et test, puis imputer les nutriments manquants dans le pipeline du modèle, et non plus en amont. Viennent ensuite le machine learning, le deep learning, l'assistant RAG et la mise en production.",
       boutonCode: 'Voir le code sur GitHub',
       credit: 'Données : © Open Food Facts contributors, licence ODbL pour la base et CC-BY-SA pour les images.',
+    },
+  },
+  etudeKeepsous: {
+    meta: {
+      titre: "KeepSous, étude de cas · Nathan Marquis",
+      description: "KeepSous : application de gestion de budget auto-hébergée, avec une cagnotte par appareil pour les imprévus et une simulation d'achat dans les prévisions.",
+    },
+    retour: "Retour au portfolio",
+    surtitre: "Étude de cas · KeepSous",
+    titre: "Un budget qui prévoit la panne du lave-linge",
+    intro: "KeepSous est l'application de budget que j'utilise chez moi. Je l'ai conçue, développée et hébergée seul. Voici ce qu'elle fait, ce qui la distingue d'une application classique, comment je l'ai construite et ce que cela m'a appris.",
+    fiche: [
+      {
+        label: "Ma part",
+        valeur: "Tout : conception, back, front, déploiement",
+      },
+      {
+        label: "Cadre",
+        valeur: "Projet personnel, seul",
+      },
+      {
+        label: "Durée",
+        valeur: "4 semaines, depuis octobre 2026",
+      },
+      {
+        label: "Outils",
+        valeur: "Next.js, TypeScript, FastAPI, PostgreSQL, Docker, GitHub Actions, Claude Code",
+      },
+    ],
+    sommaire: "Sommaire de l'étude de cas",
+    sections: {
+      contexte: "Le projet et pourquoi",
+      ecrans: "Six écrans, un fil conducteur",
+      imprevus: "Imprévus : une cagnotte par appareil",
+      previsions: "Prévisions : puis-je me permettre cet achat ?",
+      construction: "Comment c'est construit",
+      qualite: "Ce qui garde le code honnête",
+      ia: "Comment j'ai travaillé avec l'IA",
+      difficultes: "Difficultés et apprentissages",
+      suite: "La suite",
+    },
+    contexte: [
+      "KeepSous est une application de gestion de budget pour une seule personne ou un seul foyer. Elle sert à estimer et à anticiper, pas à remplacer la banque : on y saisit ses opérations, on les range par catégorie et on regarde ce qu'il reste à vivre.",
+      "Elle tourne chez moi, dans Docker, et n'écoute que sur la machine locale. Je l'ouvre sur mon téléphone comme une application installée (PWA) grâce à Tailscale. Elle n'est pas publiée et son code est privé : je peux la montrer en démonstration.",
+      "Je suis parti de six maquettes d'écran, en trois thèmes, puis j'ai découpé le travail en tâches. Version 1 en octobre 2026, puis deux séries d'améliorations en novembre : connexion par mot de passe, mobile, et cagnottes par appareil.",
+    ],
+    ecrans: {
+      intro: "Chaque écran répond à une question simple.",
+      colonnes: {
+        ecran: "Écran",
+        question: "Question à laquelle il répond",
+      },
+      liste: {
+        accueil: {
+          nom: "Accueil",
+          question: "Où en suis-je ce mois-ci ?",
+        },
+        operations: {
+          nom: "Opérations",
+          question: "Qu'est-ce que j'ai dépensé, et où ?",
+        },
+        enveloppes: {
+          nom: "Enveloppes",
+          question: "Est-ce que je tiens mes plafonds par catégorie ?",
+        },
+        imprevus: {
+          nom: "Imprévus",
+          question: "Combien mettre de côté pour remplacer mes appareils ?",
+        },
+        previsions: {
+          nom: "Prévisions",
+          question: "Que va devenir mon solde, et puis-je me permettre cet achat ?",
+        },
+        parametres: {
+          nom: "Paramètres",
+          question: "Comment régler l'appli, importer ou exporter mes données ?",
+        },
+      },
+      themes: "Trois thèmes sont livrés : clair vert, clair rouge et sombre vert.",
+    },
+    imprevus: {
+      paragraphes: [
+        "La première version avait une réserve unique pour tous les imprévus. Elle disait combien mettre de côté, mais pas pour quoi. J'ai remplacé cette réserve par une cagnotte par appareil (décision d'architecture n° 22).",
+        "Chaque appareil a un type (électroménager, véhicule, téléphone et informatique, multimédia, logement, divers), une date d'achat, une durée de vie et un coût de remplacement. L'application en déduit sa fin de vie, la part de vie déjà utilisée et un niveau de risque de panne : faible sous 60 %, moyen sous 85 %, élevé au-delà.",
+        "La somme mensuelle est ce qui manque pour remplacer l'appareil, divisé par les mois restants, arrondi au centime supérieur. Pour un véhicule, la fin de vie est la plus proche entre l'âge et le kilométrage extrapolé. Un appareil qui a dépassé sa fin de vie est « en sursis » : il reste dans le budget, avec un mois pour finir de remplir sa cagnotte.",
+      ],
+      alerte: "Quand le budget est serré, l'application remplit les cagnottes par ordre de priorité et indique pour chacune si elle est couverte, partielle ou non couverte, avec le manque total.",
+      exemple: {
+        colonnes: {
+          appareil: "Appareil",
+          vie: "Vie utilisée",
+          cout: "Coût",
+          cagnotte: "Déjà en cagnotte",
+          mois: "Mois restants",
+          parMois: "À mettre de côté ce mois-ci",
+        },
+        appareils: {
+          lavelinge: {
+            nom: "Lave-linge",
+          },
+          voiture: {
+            nom: "Voiture, 150 000 km sur 250 000",
+          },
+          telephone: {
+            nom: "Téléphone en sursis",
+            vie: "100 % ou plus",
+          },
+        },
+        legende: "Appareils et montants fictifs.",
+      },
+      legendeAvant: "Extrait de ",
+      legendeApres: " : la somme mensuelle est ce qui manque, divisé par les mois restants, arrondi au centime supérieur.",
+    },
+    previsions: {
+      paragraphes: [
+        "L'écran Prévisions extrapole le solde des mois à venir. Il contient un simulateur d'achat : on choisit un achat (téléviseur, ordinateur, vacances, voiture) ou un montant libre, et un paiement comptant, en 3 fois ou en 12 fois.",
+        "Le solde simulé de fin de mois est le solde de départ, plus les revenus, moins les dépenses, moins la première échéance. Trois scénarios : les chiffres actuels, un mois plus serré (+20 % de dépenses) ou plus léger (−20 %).",
+        "Le montant est découpé en centimes entiers : les échéances suivantes sont arrondies vers le bas et la première absorbe le reste. La simulation tourne dans le navigateur : rien n'est envoyé au serveur ni enregistré.",
+      ],
+      colonnes: {
+        verdict: "Verdict",
+        condition: "Condition",
+      },
+      verdicts: {
+        possible: {
+          nom: "Possible",
+          condition: "Le solde simulé reste au-dessus de la marge de sécurité",
+        },
+        serre: {
+          nom: "Serré",
+          condition: "Le solde simulé reste positif, mais sous la marge",
+        },
+        horsDePortee: {
+          nom: "Hors de portée",
+          condition: "Le solde simulé passe sous zéro",
+        },
+      },
+    },
+    construction: [
+      "Le front est en Next.js (TypeScript strict, Tailwind, daisyUI). Le back est en FastAPI, avec une base PostgreSQL de 9 tables. Le navigateur appelle /api/* sur Next.js, qui relaie vers le back : pas de CORS à gérer.",
+      "Chaque fonctionnalité a son dossier côté back (routes, schémas, service, modèles). Les types TypeScript sont générés à partir du contrat OpenAPI de FastAPI : si le back change, le front ne compile plus tant qu'il n'est pas à jour.",
+      "Les montants sont des entiers en centimes, toujours positifs : c'est la catégorie qui donne le sens (dépense ou revenu). La base est écrite en SQL à la main, avec des correctifs numérotés et suivis dans une table.",
+      "Tout tourne dans Docker. Un seul Makefile pilote le projet sous Linux et sous Windows (PowerShell). Une sauvegarde quotidienne de la base est planifiée, et la restauration est testée.",
+    ],
+    qualite: {
+      paragraphes: [
+        "Le projet compte 462 tests côté back et 372 côté front, plus 19 scénarios de bout en bout (Playwright) qui tournent sur une pile Docker jetable.",
+        "La CI GitHub Actions lance deux jobs en parallèle à chaque envoi : la vérification complète (lint, typage, tests, contrat d'API) et les tests de bout en bout.",
+        "Les formules de cagnotte existent côté back (Python) et côté front (aperçu en direct). Des tests vérifient que les deux donnent les mêmes résultats.",
+        "Chaque choix structurant est écrit dans une décision d'architecture : il y en a 23, de « montants en centimes » à « dépendances Python gérées par uv ».",
+      ],
+      colonnes: {
+        mesure: "Mesure",
+        valeur: "Valeur",
+      },
+      mesures: {
+        ecrans: "Écrans",
+        tables: "Tables SQL",
+        endpoints: "Endpoints FastAPI",
+        adr: "Décisions d'architecture",
+        testsBack: "Tests back",
+        testsFront: "Tests front",
+        testsE2e: "Tests de bout en bout",
+        themes: "Thèmes",
+        commits: "Commits",
+      },
+      notes: {
+        ecrans: "+ connexion et hors ligne",
+        commits: "du 13 oct. au 9 nov. 2026",
+      },
+    },
+    ia: [
+      "J'ai utilisé Claude Code pour écrire une grande partie du code. Mon rôle : concevoir les écrans, décider de l'architecture, découper le travail en tâches et relire.",
+      "Pour cadrer l'IA, j'ai écrit un document d'architecture avec des règles explicites pour elle, une fiche par fonctionnalité, des décisions d'architecture et deux guides de style (back et front). Les tâches de lint et de tests sont déléguées à un agent dédié.",
+      "Les garde-fous sont les tests, le typage et la CI : un changement ne passe que si tout est vert. Ce que je ne délègue pas : le choix des règles de calcul et la décision de remplacer la réserve globale par une cagnotte par appareil.",
+    ],
+    difficultes: {
+      intro: "À RÉDIGER PAR NATHAN : 2 ou 3 difficultés, chacune avec ce que j'en ai appris.",
+      points: [
+        {
+          titre: "À RÉDIGER PAR NATHAN",
+          texte: "À RÉDIGER PAR NATHAN",
+        },
+        {
+          titre: "À RÉDIGER PAR NATHAN",
+          texte: "À RÉDIGER PAR NATHAN",
+        },
+        {
+          titre: "À RÉDIGER PAR NATHAN",
+          texte: "À RÉDIGER PAR NATHAN",
+        },
+      ],
+    },
+    suite: {
+      paragraphe: "La version 1 est terminée et utilisée. Il reste des finitions : tester l'installation sur téléphone et le rendu à 375 px. Les pistes suivantes sont notées, pas démarrées : objectifs d'épargne, import de relevés bancaires en CSV.",
+      boutonCode: "Code privé, démo sur demande",
+      credit: "Maquettes et captures : données fictives.",
+    },
+    visuels: {
+      accueil: {
+        alt: "Écran d'accueil de KeepSous en thème clair vert : reste à vivre du mois et récapitulatif des opérations, avec des données fictives.",
+        legende: "Données fictives.",
+      },
+      imprevus: {
+        alt: "Écran Imprévus en thème clair vert : une cagnotte par appareil, avec le niveau de risque de panne et la somme à mettre de côté ce mois-ci.",
+        legende: "Données fictives.",
+      },
+      imprevusSombre: {
+        alt: "Le même écran Imprévus en thème sombre vert.",
+        legende: "Même écran en thème sombre vert. Données fictives.",
+      },
+      imprevusMobile: {
+        alt: "Écran Imprévus de KeepSous sur téléphone, en thème clair vert : la liste des appareils avec leurs cagnottes, avec des données fictives.",
+        legende: "Écran Imprévus sur téléphone (PWA). Données fictives.",
+      },
+      previsions: {
+        alt: "Écran Prévisions avec le simulateur d'achat : un achat payé en 3 fois et son verdict sur le solde de fin de mois.",
+        legende: "Données fictives.",
+      },
     },
   },
   footer: {

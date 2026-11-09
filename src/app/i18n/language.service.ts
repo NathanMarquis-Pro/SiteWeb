@@ -9,14 +9,18 @@ import { Langue, PageId } from './translations';
 /** Clé de `localStorage` lue par `public/langue.js` (redirection depuis la racine). */
 export const CLE_STOCKAGE = 'langue';
 
-/** Langue d'une URL : `…/en`, `…/en/` et `…/en/nutriscope[/]` → anglais, tout le reste → français. */
+/** Segment d'URL de chaque page (vide pour l'accueil). */
+export const SLUGS: Record<PageId, string> = { accueil: '', nutriscope: 'nutriscope', keepsous: 'keepsous' };
+
+/** Langue d'une URL : `…/en`, `…/en/` et `…/en/<étude>[/]` → anglais, tout le reste → français. */
 export function langueDepuisChemin(chemin: string): Langue {
-  return /\/en(?:\/(?:nutriscope\/?)?)?$/.test(chemin) ? 'en' : 'fr';
+  return /\/en(?:\/(?:(?:nutriscope|keepsous)\/?)?)?$/.test(chemin) ? 'en' : 'fr';
 }
 
-/** Page d'une URL : `…/nutriscope[/]` → étude de cas, tout le reste → accueil. */
+/** Page d'une URL : `…/nutriscope[/]` ou `…/keepsous[/]` → étude de cas, tout le reste → accueil. */
 export function pageDepuisChemin(chemin: string): PageId {
-  return /\/nutriscope\/?$/.test(chemin) ? 'nutriscope' : 'accueil';
+  const m = /\/(nutriscope|keepsous)\/?$/.exec(chemin);
+  return m ? (m[1] as PageId) : 'accueil';
 }
 
 /**
@@ -82,21 +86,22 @@ export class LanguageService {
 
   /** Lien vers la page courante dans une autre langue, relatif au `<base href>`. */
   lienLangue(l: Langue): string {
-    const chemin = this.page() === 'nutriscope' ? 'nutriscope/' : '';
+    const slug = SLUGS[this.page()];
+    const chemin = slug ? `${slug}/` : '';
     return l === 'en' ? `en/${chemin}` : chemin || './';
   }
 
-  /** Lien vers l'étude de cas NutriScope, dans la langue active. */
-  lienEtude(): string {
-    return this.lang() === 'en' ? 'en/nutriscope/' : 'nutriscope/';
+  /** Lien vers une étude de cas (NutriScope par défaut), dans la langue active. */
+  lienEtude(page: Exclude<PageId, 'accueil'> = 'nutriscope'): string {
+    return `${this.lang() === 'en' ? 'en/' : ''}${SLUGS[page]}/`;
   }
 
   /**
    * Ancre de l'étude de cas. Comme pour `lien()`, `#id` mènerait à l'accueil (`<base href>`) :
    * on rappelle donc le chemin de la page.
    */
-  ancreEtude(id: string): string {
-    return `${this.lienEtude()}#${id}`;
+  ancreEtude(id: string, page: Exclude<PageId, 'accueil'> = 'nutriscope'): string {
+    return `${this.lienEtude(page)}#${id}`;
   }
 
   /** Mémorise le choix de langue : `public/langue.js` le relit pour ne plus rediriger depuis `/`. */

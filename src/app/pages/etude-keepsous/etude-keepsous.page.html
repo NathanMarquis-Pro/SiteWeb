@@ -1,0 +1,266 @@
+@let e = t().etudeKeepsous;
+<main>
+  <header class="border-b border-base-300 bg-base-200">
+    <div class="conteneur py-14">
+      <a [href]="langue.lien('#keepsous')" class="link link-hover text-base-content/80"><span aria-hidden="true">← </span>{{ e.retour }}</a>
+      <p class="surtitre mt-8">{{ e.surtitre }}</p>
+      <h1 class="mt-2 max-w-[860px] font-serif text-[clamp(34px,4.4vw,52px)] leading-[1.1] font-normal text-primary">{{ e.titre }}</h1>
+      <p class="mt-4 max-w-[720px] text-lg text-base-content/80">{{ e.intro }}</p>
+      <dl class="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+        @for (ligne of e.fiche; track $index) {
+          <div>
+            <dt class="text-sm text-base-content/70">{{ ligne.label }}</dt>
+            <dd class="mt-0.5 font-medium">{{ ligne.valeur }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </header>
+
+  <nav [attr.aria-label]="e.sommaire" class="border-b border-base-300 bg-base-100">
+    <ul class="conteneur flex flex-wrap gap-x-6 gap-y-1 py-3 text-sm">
+      @for (id of sections; track id) {
+        <li><a [href]="langue.ancreEtude(id, 'keepsous')" class="link link-hover inline-block py-1">{{ e.sections[id] }}</a></li>
+      }
+    </ul>
+  </nav>
+
+  <section id="contexte" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.contexte }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.contexte; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="ecrans" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.ecrans }}</h2>
+      <p class="mt-4 max-w-[720px] text-base-content/80">{{ e.ecrans.intro }}</p>
+      <div class="mt-8 overflow-x-auto rounded-box border border-base-300 bg-base-100" tabindex="0" role="region" [attr.aria-label]="e.sections.ecrans">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.ecrans.colonnes.ecran }}</th>
+              <th scope="col" class="min-w-[22rem]">{{ e.ecrans.colonnes.question }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (id of ecrans; track id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.ecrans.liste[id].nom }}</th>
+                <td class="text-base-content/80">{{ e.ecrans.liste[id].question }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-6 max-w-[720px] text-base-content/80">{{ e.ecrans.themes }}</p>
+      @let vAccueil = visuel('accueil');
+      @if (vAccueil) {
+        <figure class="mt-8 min-w-0">
+          <img [src]="vAccueil.fichier" [width]="vAccueil.largeur" [height]="vAccueil.hauteur" [alt]="e.visuels.accueil.alt" loading="lazy" class="w-full rounded-box border border-base-300" />
+          <figcaption class="mt-2.5 text-sm text-base-content/70">{{ e.visuels.accueil.legende }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
+
+  <section id="imprevus" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.imprevus }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.imprevus.paragraphes; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+      <div role="note" class="alert alert-soft alert-success mt-6 max-w-[720px] items-start">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="mt-0.5 shrink-0"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg>
+        <span>{{ e.imprevus.alerte }}</span>
+      </div>
+      <div class="mt-8 overflow-x-auto rounded-box border border-base-300" tabindex="0" role="region" [attr.aria-label]="e.sections.imprevus">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.imprevus.exemple.colonnes.appareil }}</th>
+              <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.vie }}</th>
+              <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.cout }}</th>
+              <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.cagnotte }}</th>
+              <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.mois }}</th>
+              <th scope="col" class="text-right">{{ e.imprevus.exemple.colonnes.parMois }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (a of appareils; track a.id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.imprevus.exemple.appareils[a.id].nom }}</th>
+                <td class="text-right tabular-nums whitespace-nowrap">{{ e.imprevus.exemple.appareils[a.id].vie ?? pourcent(a.vieUtilisee) }}</td>
+                <td class="text-right tabular-nums whitespace-nowrap">{{ euros(a.coutCents) }}</td>
+                <td class="text-right tabular-nums whitespace-nowrap">{{ euros(a.cagnotteCents) }}</td>
+                <td class="text-right tabular-nums">{{ langue.nombre(a.moisRestants) }}</td>
+                <td class="text-right font-semibold tabular-nums whitespace-nowrap">{{ euros(a.parMoisCents, 2) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2.5 text-sm text-base-content/70">{{ e.imprevus.exemple.legende }}</p>
+
+      <figure class="mt-10 max-w-[720px]">
+        <div class="mockup-code w-full text-sm" tabindex="0">
+          @for (ligne of keepsous.code; track $index) {
+            <pre [attr.data-prefix]="$index + 1" [class.text-warning]="ligne.alerte"><code>{{ ligne.texte }}</code></pre>
+          }
+        </div>
+        <figcaption class="mt-2.5 text-sm text-base-content/70">
+          {{ e.imprevus.legendeAvant }}<code class="font-mono">{{ keepsous.fonctionExtraite }}</code>{{ e.imprevus.legendeApres }}
+        </figcaption>
+      </figure>
+
+      @let vImprevus = visuel('imprevus');
+      @let vSombre = visuel('imprevusSombre');
+      @if (vImprevus || vSombre) {
+        <div class="mt-10 grid gap-6 sm:grid-cols-2">
+          @if (vImprevus) {
+            <figure class="min-w-0">
+              <img [src]="vImprevus.fichier" [width]="vImprevus.largeur" [height]="vImprevus.hauteur" [alt]="e.visuels.imprevus.alt" loading="lazy" class="w-full rounded-box border border-base-300" />
+              <figcaption class="mt-2.5 text-sm text-base-content/70">{{ e.visuels.imprevus.legende }}</figcaption>
+            </figure>
+          }
+          @if (vSombre) {
+            <figure class="min-w-0">
+              <img [src]="vSombre.fichier" [width]="vSombre.largeur" [height]="vSombre.hauteur" [alt]="e.visuels.imprevusSombre.alt" loading="lazy" class="w-full rounded-box border border-base-300" />
+              <figcaption class="mt-2.5 text-sm text-base-content/70">{{ e.visuels.imprevusSombre.legende }}</figcaption>
+            </figure>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <section id="previsions" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.previsions }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.previsions.paragraphes; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+      <div class="mt-8 overflow-x-auto rounded-box border border-base-300 bg-base-100" tabindex="0" role="region" [attr.aria-label]="e.sections.previsions">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.previsions.colonnes.verdict }}</th>
+              <th scope="col" class="min-w-[22rem]">{{ e.previsions.colonnes.condition }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (id of verdicts; track id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.previsions.verdicts[id].nom }}</th>
+                <td class="text-base-content/80">{{ e.previsions.verdicts[id].condition }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @let vPrevisions = visuel('previsions');
+      @if (vPrevisions) {
+        <figure class="mt-8 min-w-0">
+          <img [src]="vPrevisions.fichier" [width]="vPrevisions.largeur" [height]="vPrevisions.hauteur" [alt]="e.visuels.previsions.alt" loading="lazy" class="w-full rounded-box border border-base-300" />
+          <figcaption class="mt-2.5 text-sm text-base-content/70">{{ e.visuels.previsions.legende }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
+
+  <section id="construction" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.construction }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.construction; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+      @let vMobile = visuel('imprevusMobile');
+      @if (vMobile) {
+        <figure class="mt-8 max-w-[260px]">
+          <img [src]="vMobile.fichier" [width]="vMobile.largeur" [height]="vMobile.hauteur" [alt]="e.visuels.imprevusMobile.alt" loading="lazy" class="w-full rounded-box border border-base-300" />
+          <figcaption class="mt-2.5 text-sm text-base-content/70">{{ e.visuels.imprevusMobile.legende }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
+
+  <section id="qualite" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.qualite }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.qualite.paragraphes; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+      <div class="mt-8 overflow-x-auto rounded-box border border-base-300 bg-base-100" tabindex="0" role="region" [attr.aria-label]="e.sections.qualite">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.qualite.colonnes.mesure }}</th>
+              <th scope="col" class="text-right">{{ e.qualite.colonnes.valeur }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (m of mesures; track m.id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.qualite.mesures[m.id] }}</th>
+                <td class="text-right tabular-nums">
+                  {{ langue.nombre(m.valeur) }}
+                  @if (e.qualite.notes[m.id]; as note) {
+                    <span class="text-base-content/70">({{ note }})</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ia" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.ia }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.ia; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="difficultes" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.difficultes }}</h2>
+      <p class="mt-4 max-w-[720px] text-base-content/80">{{ e.difficultes.intro }}</p>
+      <ul class="mt-4 max-w-[720px] list-disc space-y-3 pl-5 text-base-content/80">
+        @for (point of e.difficultes.points; track $index) {
+          <li><strong class="font-semibold text-base-content">{{ point.titre }}</strong> {{ point.texte }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="suite" class="scroll-mt-20 border-t border-base-300">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.suite }}</h2>
+      <p class="mt-4 max-w-[720px] text-base-content/80">{{ e.suite.paragraphe }}</p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a [href]="langue.lien('#keepsous')" class="btn btn-outline btn-primary">{{ e.retour }}</a>
+        <a [href]="langue.lien('#contact')" class="btn btn-ghost">{{ e.suite.boutonCode }}</a>
+      </div>
+      <p class="mt-8 text-sm text-base-content/70">{{ e.suite.credit }}</p>
+    </div>
+  </section>
+</main>

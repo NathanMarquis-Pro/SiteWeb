@@ -11,5 +11,7 @@ export const routes: Routes = [
   { path: 'en', component: AccueilPage },
   { path: 'nutriscope', loadComponent: () => import('./pages/etude-nutriscope/etude-nutriscope.page').then((m) => m.EtudeNutriscopePage) },
   { path: 'en/nutriscope', loadComponent: () => import('./pages/etude-nutriscope/etude-nutriscope.page').then((m) => m.EtudeNutriscopePage) },
+  { path: 'keepsous', loadComponent: () => import('./pages/etude-keepsous/etude-keepsous.page').then((m) => m.EtudeKeepsousPage) },
+  { path: 'en/keepsous', loadComponent: () => import('./pages/etude-keepsous/etude-keepsous.page').then((m) => m.EtudeKeepsousPage) },
   { path: '**', redirectTo: '' },
 ];

@@ -1,4 +1,4 @@
-import { URL_ETUDE, URL_PAGE } from './i18n/seo';
+import { URL_ETUDE, URL_KEEPSOUS, URL_PAGE } from './i18n/seo';
 import { SITE_URL } from './shared/liens';
 
 /**
@@ -28,13 +28,13 @@ describe('fichiers de public/', () => {
     expect(robots).toContain(`Sitemap: ${SITE_URL}sitemap.xml`);
   });
 
-  it('sitemap.xml liste les quatre pages avec leurs alternatives hreflang absolues', async () => {
+  it('sitemap.xml liste les six pages avec leurs alternatives hreflang absolues', async () => {
     const xml = new DOMParser().parseFromString(await lire('sitemap.xml'), 'application/xml');
     expect(xml.querySelector('parsererror')).toBeNull();
     const urls = Array.from(xml.getElementsByTagName('url'));
-    expect(urls.map((u) => u.getElementsByTagName('loc')[0].textContent)).toEqual([URL_PAGE.fr, URL_PAGE.en, URL_ETUDE.fr, URL_ETUDE.en]);
+    expect(urls.map((u) => u.getElementsByTagName('loc')[0].textContent)).toEqual([URL_PAGE.fr, URL_PAGE.en, URL_ETUDE.fr, URL_ETUDE.en, URL_KEEPSOUS.fr, URL_KEEPSOUS.en]);
     // Chaque page déclare les mêmes trois alternatives (fr, en, x-default = français) que ses jumelles.
-    for (const [i, version] of [URL_PAGE, URL_PAGE, URL_ETUDE, URL_ETUDE].entries()) {
+    for (const [i, version] of [URL_PAGE, URL_PAGE, URL_ETUDE, URL_ETUDE, URL_KEEPSOUS, URL_KEEPSOUS].entries()) {
       const alternatives = Array.from(urls[i].getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'link'));
       expect(alternatives.length).withContext(`page ${i}`).toBe(3);
       const attendu: Record<string, string> = { fr: version.fr, en: version.en, 'x-default': version.fr };

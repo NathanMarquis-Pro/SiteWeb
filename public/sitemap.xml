@@ -24,4 +24,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://nathanmarquis-pro.github.io/SiteWeb/en/nutriscope/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nathanmarquis-pro.github.io/SiteWeb/nutriscope/"/>
   </url>
+  <url>
+    <loc>https://nathanmarquis-pro.github.io/SiteWeb/keepsous/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://nathanmarquis-pro.github.io/SiteWeb/keepsous/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nathanmarquis-pro.github.io/SiteWeb/en/keepsous/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nathanmarquis-pro.github.io/SiteWeb/keepsous/"/>
+  </url>
+  <url>
+    <loc>https://nathanmarquis-pro.github.io/SiteWeb/en/keepsous/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://nathanmarquis-pro.github.io/SiteWeb/keepsous/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nathanmarquis-pro.github.io/SiteWeb/en/keepsous/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nathanmarquis-pro.github.io/SiteWeb/keepsous/"/>
+  </url>
 </urlset>
