@@ -23,4 +23,34 @@ export const fr: Translations = {
     bouton1: 'Voir mon projet en cours',
     bouton2: 'Télécharger mon CV',
   },
+  nutriscope: {
+    surtitre: 'Le projet du moment',
+    titre: 'NutriScope',
+    intro:
+      "Avec deux camarades de formation, on construit une application qui dit si un produit alimentaire est bon, et sinon, ce qui est mieux. 216 heures sur 8 mois, sur les vraies données d'Open Food Facts.",
+    jalons: [
+      { nom: 'Cadrage', date: 'sept. 2026' },
+      { nom: 'Base de données', date: 'sept. 2026' },
+      { nom: 'Nettoyage', date: 'oct. 2026' },
+      { nom: 'Machine Learning' },
+      { nom: 'Deep Learning' },
+      { nom: 'Assistant RAG' },
+      { nom: 'Mise en production' },
+    ],
+    h3: 'Ma partie : rendre les données utilisables',
+    p1: "Au départ, il y avait {depart} produits. À l'arrivée, il en reste {arrivee}. J'ai supprimé plus de la moitié du catalogue, et je peux justifier chaque ligne retirée.",
+    p2: "Chacune de mes règles produit son propre compte rendu chiffré. Le rapport de nettoyage se génère tout seul, ce qui permet à toute l'équipe de voir ce qui a changé et pourquoi.",
+    p3: "J'ai ensuite découpé les données en fichiers Parquet avec DuckDB et préparé le fichier de features pour les futurs modèles.",
+    alerte:
+      "Je n'invente pas les nutriments manquants : je les signale. Les compléter maintenant fausserait les modèles, il faudra le faire après le découpage entraînement / test.",
+    stats: [
+      { titre: 'Doublons', desc: 'même code-barres' },
+      { titre: 'Inclassables', desc: 'ni catégorie, ni rayon' },
+      { titre: 'Vides', desc: 'aucun nutriment' },
+    ],
+    legendeAvant: 'Extrait de ',
+    legendeApres: ' : chaque colonne reçoit une décision explicite, et une décision inconnue arrête le pipeline.',
+    boutonEtude: "Lire l'étude de cas",
+    boutonCode: 'Voir le code sur GitHub',
+  },
 };

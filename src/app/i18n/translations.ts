@@ -22,4 +22,21 @@ export interface Translations {
     bouton1: string;
     bouton2: string;
   };
+  nutriscope: {
+    surtitre: string;
+    titre: string;
+    intro: string;
+    jalons: { nom: string; date?: string }[];
+    h3: string;
+    /** Peut contenir {depart} et {arrivee}, remplacés par des nombres formatés. */
+    p1: string;
+    p2: string;
+    p3: string;
+    alerte: string;
+    stats: { titre: string; desc: string }[];
+    legendeAvant: string;
+    legendeApres: string;
+    boutonEtude: string;
+    boutonCode: string;
+  };
 }
