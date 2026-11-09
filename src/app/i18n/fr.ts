@@ -22,6 +22,7 @@ export const fr: Translations = {
       "Tout le monde dit que l'IA va remplacer le travail. J'ai préféré aller vérifier par moi-même, et apprendre à m'en servir.",
     bouton1: 'Voir mon projet en cours',
     bouton2: 'Télécharger mon CV',
+    legendePhoto: 'À Flines-lez-Raches, près de Lille',
   },
   nutriscope: {
     surtitre: 'Le projet du moment',
@@ -52,5 +53,21 @@ export const fr: Translations = {
     legendeApres: ' : chaque colonne reçoit une décision explicite, et une décision inconnue arrête le pipeline.',
     boutonEtude: "Lire l'étude de cas",
     boutonCode: 'Voir le code sur GitHub',
+  },
+  imsa: {
+    surtitre: 'Stage · iMSA, avril à juin 2025',
+    titre: "D'un premier test illisible à 48 tests que toute l'équipe peut reprendre",
+    p1: "Mon projet principal était d'automatiser les tests d'un service en ligne de la MSA avec Playwright. Un projet de ce genre existait déjà dans l'entreprise, mais quand je l'ai ouvert, je n'y ai absolument rien compris : les autres équipes n'avaient pas les mêmes besoins que nous.",
+    p2: "Je suis donc reparti de la documentation. La première fois que mon test est passé au vert, j'étais admiratif : Playwright se déplaçait sur la page et cliquait sur les boutons comme un vrai utilisateur, mais 200 fois plus vite.",
+    p3: "C'est là que la vraie réflexion a commencé : rendre ces tests maintenables et faciles à comprendre, parce que j'allais devoir passer la main.",
+    badgeAvant: 'Avant',
+    badgeApres: 'Après',
+    ariaAvant: 'Avant : le test généré, avec les mêmes clics répétés sur chaque page',
+    ariaApres: 'Après : une carte des pages et une seule fonction de navigation',
+    resultats: [
+      { fort: '48', apres: ' tests end-to-end' },
+      { fort: '28', apres: ' méthodes réutilisables' },
+      { avant: 'Tests de non-régression : ', fort: "d'une journée à 5-10 minutes" },
+    ],
   },
 };

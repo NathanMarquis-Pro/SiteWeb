@@ -21,6 +21,7 @@ export interface Translations {
     paragraphe2: string;
     bouton1: string;
     bouton2: string;
+    legendePhoto: string;
   };
   nutriscope: {
     surtitre: string;
@@ -38,5 +39,17 @@ export interface Translations {
     legendeApres: string;
     boutonEtude: string;
     boutonCode: string;
+  };
+  imsa: {
+    surtitre: string;
+    titre: string;
+    p1: string;
+    p2: string;
+    p3: string;
+    badgeAvant: string;
+    badgeApres: string;
+    ariaAvant: string;
+    ariaApres: string;
+    resultats: { avant?: string; fort: string; apres?: string }[];
   };
 }
