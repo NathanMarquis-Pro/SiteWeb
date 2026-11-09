@@ -1,0 +1,39 @@
+<section id="projets" class="conteneur scroll-mt-20 py-20">
+  <h2 class="mb-8 font-serif text-[36px] font-normal text-primary">{{ t().projets.titre }}</h2>
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    @for (projet of projets; track projet.id) {
+      <article class="card card-border card-sm scroll-mt-20 border-base-300 bg-base-100" [attr.id]="projet.ancre ?? null">
+        <div class="card-body">
+          <p class="grow-0 text-xs text-base-content/60">{{ t().projets.liste[projet.id].surtitre }}</p>
+          <h3 class="card-title text-lg">{{ projet.nom }}</h3>
+          <p class="grow-0 text-[15px] text-base-content/80">{{ t().projets.liste[projet.id].description }}</p>
+          @if (projet.barres) {
+            <div class="flex flex-col gap-1.5 text-sm">
+              @for (barre of projet.barres; track barre.cle) {
+                <div class="flex items-center gap-2">
+                  <span class="w-20 text-base-content/60">{{ t().projets[barre.cle] }}</span>
+                  <progress
+                    class="progress flex-1"
+                    [class.progress-primary]="barre.cle === 'xgboost'"
+                    [value]="barre.pourcent"
+                    max="100"
+                    [attr.aria-label]="t().projets[barre.cle] + ' : ' + decimal(barre.valeur)"
+                  ></progress>
+                  <span>{{ decimal(barre.valeur) }}</span>
+                </div>
+              }
+            </div>
+          }
+          <div class="card-actions mt-auto pt-1.5">
+            @for (badge of projet.badges; track badge) {
+              <span class="badge badge-outline badge-sm">{{ badge }}</span>
+            }
+          </div>
+          @if (projet.lien) {
+            <a class="btn btn-link btn-sm self-start px-0" [href]="projet.lien" target="_blank" rel="noopener">GitHub</a>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>

@@ -52,4 +52,30 @@ export interface Translations {
     ariaApres: string;
     resultats: { avant?: string; fort: string; apres?: string }[];
   };
+  methode: {
+    titre: string;
+    intro: string;
+    items: { titre: string; texte: string; lien?: string }[];
+  };
+  projets: {
+    titre: string;
+    moyenne: string;
+    xgboost: string;
+    /** Indexé par identifiant de projet (voir data/projets.ts). */
+    liste: Record<string, { surtitre: string; description: string }>;
+  };
+  parcours: {
+    titre: string;
+    items: { date: string; titre: string; detail: string; lien?: string }[];
+  };
+  competences: {
+    titre: string;
+    legendePleine: string;
+    legendeVide: string;
+    enCoursSr: string;
+    groupes: { ia: string; qualite: string; web: string; langues: string };
+    langues: string;
+  };
+  horsCode: { titre: string; texte: string };
+  footer: { titre: string; texte: string; basDePage: string };
 }

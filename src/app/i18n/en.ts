@@ -70,4 +70,107 @@ export const en: Translations = {
       { avant: 'Regression testing: ', fort: 'from a full day to 5–10 minutes' },
     ],
   },
+  methode: {
+    titre: 'How I work',
+    intro: 'Three habits picked up during my degree, my internship and my training, which I keep on every project.',
+    items: [
+      {
+        titre: 'I check before I believe.',
+        texte:
+          "You read everywhere that data preparation matters more than the algorithm. I tested it on a lab exercise: it's more nuanced, it depends on the model.",
+        lien: 'See the Wine Quality exercise',
+      },
+      {
+        titre: 'I build things you can run again.',
+        texte:
+          'My Parcoursup script downloads the official data, checks the file, builds the database and cleans up after itself. One run, the same result every time.',
+        lien: 'See the project',
+      },
+      {
+        titre: 'I write for whoever takes over my code.',
+        texte:
+          'Test tools designed for the whole team at iMSA, an automatic report for every cleaning rule in NutriScope.',
+        lien: 'See the internship',
+      },
+    ],
+  },
+  projets: {
+    titre: 'Other projects',
+    moyenne: 'Average',
+    xgboost: 'XGBoost',
+    liste: {
+      wine: {
+        surtitre: 'Training lab · Oct. 2026',
+        description: "Predicting a wine's rating, and measuring what actually lowers the average error.",
+      },
+      parcoursup: {
+        surtitre: 'University project · SAE 2.04',
+        description:
+          'A SQL script that downloads the 13,870 Parcoursup programmes, checks the file, then loads them into a clean PostgreSQL database.',
+      },
+      kfinds: {
+        surtitre: 'University project · SAE 3.02',
+        description:
+          'Load a dataset, plot it as a scatter chart and classify a new point based on its neighbours.',
+      },
+      universelille: {
+        surtitre: 'University project · SAE 4.01',
+        description:
+          'An instant messaging app for students and staff at the University of Lille, deployed on Tomcat.',
+      },
+    },
+  },
+  parcours: {
+    titre: 'Background',
+    items: [
+      {
+        date: '2020 → 2023',
+        titre: 'Technology baccalaureate (STI2D, IT and digital systems) · highest honours',
+        detail: 'Lycée Elisa Lemonnier (formerly Edmond Labbé), Douai',
+        lien: 'See the programme',
+      },
+      {
+        date: '2023 → 2025',
+        titre: 'DUT in Computer Science (2-year university degree)',
+        detail: "IUT de Lille, Villeneuve-d'Ascq · application development track",
+        lien: 'See the programme',
+      },
+      {
+        date: 'April → June 2025 · 10 weeks',
+        titre: 'Full-stack developer internship, iMSA (Avelin)',
+        detail: 'Angular, Spring Boot, Playwright · SAFe organisation',
+        lien: '48 tests',
+      },
+      {
+        date: 'July 2026 → March 2027 · ongoing',
+        titre: 'AI Developer professional qualification (French level 6)',
+        detail: 'M2i · data, machine learning, deep learning, generative AI, deployment, GDPR',
+        lien: 'NutriScope',
+      },
+    ],
+  },
+  competences: {
+    titre: 'What I use',
+    legendePleine: 'Skill acquired',
+    legendeVide: 'Currently learning',
+    enCoursSr: '(currently learning)',
+    groupes: {
+      ia: 'AI and data',
+      qualite: 'Quality and tooling',
+      web: 'Web development',
+      langues: 'Languages',
+    },
+    langues: 'French · Fluent English (TOEIC 900/990)',
+  },
+  horsCode: {
+    titre: 'Away from the keyboard',
+    texte:
+      'I do a lot of sport. My latest challenge: a 16 km trail run with 300 m of elevation over the slag heaps of Raismes, after a triathlon earlier this year. Before that came 7 years of tennis, climbing, basketball, football, and always a bit of swimming.',
+  },
+  footer: {
+    titre: "Let's work together.",
+    texte:
+      "I'm looking for an internship from 18 January to 26 February 2027, then a permanent position from March. I live in Flines-lez-Raches: Lille area, Douai area, hybrid or remote.",
+    basDePage: '© 2026 Nathan Marquis · built with Angular and DaisyUI',
+  },
 };
