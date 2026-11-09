@@ -53,7 +53,7 @@ src/
   styles.css             Tailwind, thème DaisyUI, utilitaires du site
   app/
     app.ts · app.html    empile les sections
-    app.routes.ts · app.routes.server.ts · app.config.server.ts   routes `/` et `/en` à pré-rendre (côté serveur uniquement)
+    app.routes.ts · app.routes.server.ts · app.config.server.ts   routes `/`, `/en`, `/nutriscope`, `/en/nutriscope`, pré-rendues
     i18n/                LanguageService, seo.ts (meta, canonical, hreflang, JSON-LD), interface Translations, dictionnaires fr.ts / en.ts
     shared/liens.ts      liens externes et chemins de fichiers partagés
     sections/<nom>/      un dossier par section : composant, template, et données (`*.data.ts`)

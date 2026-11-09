@@ -1,16 +1,11 @@
 import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
 import { provideServerRendering, withRoutes } from '@angular/ssr';
-import { provideRouter } from '@angular/router';
 import { appConfig } from './app.config';
-import { routes } from './app.routes';
 import { serverRoutes } from './app.routes.server';
 
-/**
- * Le routeur n'est fourni que côté serveur : il sert uniquement à découvrir les routes à
- * pré-rendre (`/` et `/en`). Le bundle navigateur reste sans routeur.
- */
+/** Le routeur (dans `appConfig`) sert aussi à découvrir les pages à pré-rendre. */
 const serverConfig: ApplicationConfig = {
-  providers: [provideServerRendering(withRoutes(serverRoutes)), provideRouter(routes)],
+  providers: [provideServerRendering(withRoutes(serverRoutes))],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);

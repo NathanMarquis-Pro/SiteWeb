@@ -1,13 +1,17 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LIENS, SITE_URL } from '../shared/liens';
-import { LANGUE_INITIALE, LanguageService, langueDepuisChemin } from './language.service';
-import { Langue } from './translations';
+import { LANGUE_INITIALE, LanguageService, PAGE_INITIALE, langueDepuisChemin, pageDepuisChemin } from './language.service';
+import { Langue, PageId } from './translations';
 
-function creer(lang?: Langue): LanguageService {
+function creer(lang?: Langue, page?: PageId): LanguageService {
   TestBed.resetTestingModule();
   TestBed.configureTestingModule({
-    providers: [provideZonelessChangeDetection(), ...(lang ? [{ provide: LANGUE_INITIALE, useValue: lang }] : [])],
+    providers: [
+      provideZonelessChangeDetection(),
+      ...(lang ? [{ provide: LANGUE_INITIALE, useValue: lang }] : []),
+      ...(page ? [{ provide: PAGE_INITIALE, useValue: page }] : []),
+    ],
   });
   const service = TestBed.inject(LanguageService);
   TestBed.tick();
@@ -115,10 +119,87 @@ describe('LanguageService', () => {
       ['/en/', 'en'],
       ['/SiteWeb/en', 'en'],
       ['/SiteWeb/en/', 'en'],
+      ['/en/nutriscope', 'en'],
+      ['/SiteWeb/en/nutriscope/', 'en'],
+      ['/SiteWeb/nutriscope/', 'fr'],
       ['/SiteWeb/entreprise', 'fr'],
       ['/context.html', 'fr'],
     ] as const) {
       expect(langueDepuisChemin(chemin)).withContext(chemin).toBe(attendu);
     }
+  });
+
+  it("déduit la page de l'URL", () => {
+    for (const [chemin, attendu] of [
+      ['/', 'accueil'],
+      ['/SiteWeb/en/', 'accueil'],
+      ['/SiteWeb/nutriscope', 'nutriscope'],
+      ['/SiteWeb/nutriscope/', 'nutriscope'],
+      ['/SiteWeb/en/nutriscope/', 'nutriscope'],
+      ['/SiteWeb/nutriscope-autre/', 'accueil'],
+    ] as const) {
+      expect(pageDepuisChemin(chemin)).withContext(chemin).toBe(attendu);
+    }
+  });
+
+  describe('étude de cas NutriScope', () => {
+    const ETUDE = { fr: `${SITE_URL}nutriscope/`, en: `${SITE_URL}en/nutriscope/` };
+
+    it('titre, description, canonical et og:* de la page, dans chaque langue', () => {
+      const fr = creer('fr', 'nutriscope');
+      expect(document.title).toBe(fr.t().etude.meta.titre);
+      expect(attr('meta[name="description"]', 'content')).toBe(fr.t().etude.meta.description);
+      expect(attr('link[rel="canonical"]', 'href')).toBe(ETUDE.fr);
+      expect(attr('meta[property="og:url"]', 'content')).toBe(ETUDE.fr);
+      expect(attr('meta[property="og:type"]', 'content')).toBe('article');
+      expect(attr('meta[property="og:locale"]', 'content')).toBe('fr_FR');
+      creer('en', 'nutriscope');
+      expect(document.title).toBe('NutriScope case study · Nathan Marquis');
+      expect(attr('link[rel="canonical"]', 'href')).toBe(ETUDE.en);
+      expect(attr('meta[property="og:locale"]', 'content')).toBe('en_US');
+    });
+
+    it("hreflang pointe vers les deux versions de l'étude, x-default vers le français", () => {
+      creer('en', 'nutriscope');
+      expect(attr('link[rel="alternate"][hreflang="fr"]', 'href')).toBe(ETUDE.fr);
+      expect(attr('link[rel="alternate"][hreflang="en"]', 'href')).toBe(ETUDE.en);
+      expect(attr('link[rel="alternate"][hreflang="x-default"]', 'href')).toBe(ETUDE.fr);
+      expect(document.head.querySelectorAll('link[rel="alternate"]').length).toBe(3);
+    });
+
+    it('JSON-LD Article : titre, langue, URL et auteur', () => {
+      creer('en', 'nutriscope');
+      const blocs = document.head.querySelectorAll('script[type="application/ld+json"]');
+      expect(blocs.length).toBe(1);
+      const a = JSON.parse(blocs[0].textContent!);
+      expect(a['@type']).toBe('Article');
+      expect(a.headline).toBe('Cleaning 1.3 million food products, and being able to justify it');
+      expect(a.inLanguage).toBe('en');
+      expect(a.url).toBe(ETUDE.en);
+      expect(a.author.name).toBe('Nathan Marquis');
+      expect(a.author.sameAs).toEqual([LIENS.linkedin, LIENS.github]);
+      expect(JSON.stringify(a)).not.toContain(LIENS.email);
+    });
+
+    it("revenir à l'accueil remet les balises de l'accueil", () => {
+      creer('fr', 'nutriscope');
+      creer('fr', 'accueil');
+      expect(attr('link[rel="canonical"]', 'href')).toBe(SITE_URL);
+      expect(attr('meta[property="og:type"]', 'content')).toBe('website');
+      expect(JSON.parse(document.head.querySelector('script[type="application/ld+json"]')!.textContent!)['@type']).toBe('Person');
+    });
+
+    it('le sélecteur de langue et les liens internes restent sur la bonne page', () => {
+      const fr = creer('fr', 'nutriscope');
+      expect(fr.lienLangue('fr')).toBe('nutriscope/');
+      expect(fr.lienLangue('en')).toBe('en/nutriscope/');
+      expect(fr.lienEtude()).toBe('nutriscope/');
+      expect(fr.ancreEtude('donnees')).toBe('nutriscope/#donnees');
+      const en = creer('en', 'nutriscope');
+      expect(en.lienLangue('fr')).toBe('nutriscope/');
+      expect(en.lienLangue('en')).toBe('en/nutriscope/');
+      expect(en.lienEtude()).toBe('en/nutriscope/');
+      expect(en.ancreEtude('donnees')).toBe('en/nutriscope/#donnees');
+    });
   });
 });

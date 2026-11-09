@@ -1,0 +1,313 @@
+@let e = t().etude;
+<main>
+  <header class="border-b border-base-300 bg-base-200">
+    <div class="conteneur py-14">
+      <a [href]="langue.lien('#nutriscope')" class="link link-hover text-base-content/80"><span aria-hidden="true">← </span>{{ e.retour }}</a>
+      <p class="surtitre mt-8">{{ e.surtitre }}</p>
+      <h1 class="mt-2 max-w-[860px] font-serif text-[clamp(34px,4.4vw,52px)] leading-[1.1] font-normal text-primary">{{ e.titre }}</h1>
+      <p class="mt-4 max-w-[720px] text-lg text-base-content/80">{{ e.intro }}</p>
+      <dl class="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+        @for (ligne of e.fiche; track $index) {
+          <div>
+            <dt class="text-sm text-base-content/70">{{ ligne.label }}</dt>
+            <dd class="mt-0.5 font-medium">{{ ligne.valeur }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </header>
+
+  <nav [attr.aria-label]="e.sommaire" class="border-b border-base-300 bg-base-100">
+    <ul class="conteneur flex flex-wrap gap-x-6 gap-y-1 py-3 text-sm">
+      @for (id of sections; track id) {
+        <li><a [href]="langue.ancreEtude(id)" class="link link-hover inline-block py-1">{{ e.sections[id] }}</a></li>
+      }
+    </ul>
+  </nav>
+
+  <section id="contexte" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.contexte }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.contexte; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="donnees" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.donnees }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.donnees.paragraphes; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+      <div class="stats stats-vertical mt-8 w-full border border-base-300 bg-base-100 sm:stats-horizontal">
+        @for (volume of volumes; track volume.id) {
+          <div class="stat">
+            <div class="stat-title text-base-content/70">{{ e.donnees.volumes[volume.id].titre }}</div>
+            <div class="stat-value text-3xl text-primary">{{ langue.nombre(volume.valeur) }}</div>
+            <div class="stat-desc text-base-content/70">{{ e.donnees.volumes[volume.id].desc }}</div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="pipeline" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.pipeline }}</h2>
+      <p class="mt-4 max-w-[720px] text-base-content/80">{{ e.pipeline.intro }}</p>
+      <div class="mt-8 overflow-x-auto rounded-box border border-base-300" tabindex="0" role="region" [attr.aria-label]="e.sections.pipeline">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.pipeline.colonnes.regle }}</th>
+              <th scope="col" class="text-right">{{ e.pipeline.colonnes.avant }}</th>
+              <th scope="col" class="text-right">{{ e.pipeline.colonnes.apres }}</th>
+              <th scope="col" class="text-right">{{ e.pipeline.colonnes.touchees }}</th>
+              <th scope="col" class="min-w-[22rem]">{{ e.pipeline.colonnes.effet }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (regle of regles; track regle.id) {
+              <tr>
+                <th scope="row" class="font-mono text-sm font-normal whitespace-nowrap">{{ $index + 1 }}. {{ regle.nom }}</th>
+                <td class="text-right tabular-nums">{{ langue.nombre(regle.avant) }}</td>
+                <td class="text-right tabular-nums" [class.font-semibold]="regle.apres !== regle.avant">{{ langue.nombre(regle.apres) }}</td>
+                <td class="text-right tabular-nums">{{ langue.nombre(regle.touchees) }}</td>
+                <td class="text-base-content/80">{{ e.pipeline.regles[regle.id] }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="max-w-[720px] text-base-content/80">
+        <p class="mt-6">{{ e.pipeline.ordre }}</p>
+        <p class="mt-4">{{ e.pipeline.tests }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="manquants" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.manquants }}</h2>
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div class="max-w-[720px] text-base-content/80">
+          @for (p of e.manquants.paragraphes; track $index) {
+            <p class="mt-4">{{ p }}</p>
+          }
+          <div role="note" class="alert alert-soft alert-success mt-6 items-start">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="mt-0.5 shrink-0"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg>
+            <span>{{ e.manquants.alerte }}</span>
+          </div>
+        </div>
+        <figure class="min-w-0 self-start">
+          <div class="mockup-code w-full text-sm" tabindex="0">
+            @for (ligne of nutriscope.code; track $index) {
+              <pre [attr.data-prefix]="$index + 1" [class.text-warning]="ligne.alerte"><code>{{ ligne.texte }}</code></pre>
+            }
+          </div>
+          <figcaption class="mt-2.5 text-sm text-base-content/70">
+            {{ t().nutriscope.legendeAvant }}<code class="font-mono">{{ nutriscope.fonctionExtraite }}</code>{{ t().nutriscope.legendeApres }}
+          </figcaption>
+        </figure>
+      </div>
+      <div class="mt-10 overflow-x-auto rounded-box border border-base-300 bg-base-100" tabindex="0" role="region" [attr.aria-label]="e.sections.manquants">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.manquants.colonnes.colonne }}</th>
+              <th scope="col">{{ e.manquants.colonnes.decision }}</th>
+              <th scope="col" class="min-w-[22rem]">{{ e.manquants.colonnes.pourquoi }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (d of decisions; track d.id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.manquants.decisions[d.id].colonne }}</th>
+                <td><code class="font-mono text-sm whitespace-nowrap">{{ d.decision }}</code></td>
+                <td class="text-base-content/80">{{ e.manquants.decisions[d.id].pourquoi }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultats" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.resultats }}</h2>
+      <div class="mt-8 grid gap-10 lg:grid-cols-2">
+        <div class="min-w-0">
+          <h3 class="text-xl font-semibold text-primary">{{ e.resultats.anomaliesTitre }}</h3>
+          <div class="mt-4 overflow-x-auto rounded-box border border-base-300" tabindex="0" role="region" [attr.aria-label]="e.resultats.anomaliesTitre">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="sr-only">{{ e.resultats.anomaliesTitre }}</span></th>
+                  <th scope="col" class="text-right">{{ e.resultats.colonneAvant }}</th>
+                  <th scope="col" class="text-right">{{ e.resultats.colonneApres }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (a of anomalies; track a.id) {
+                  <tr>
+                    <th scope="row" class="font-normal">{{ e.resultats.anomalies[a.id] }}</th>
+                    <td class="text-right tabular-nums">{{ langue.nombre(a.avant) }}</td>
+                    <td class="text-right tabular-nums font-semibold" [class.text-success]="a.apres === 0">{{ langue.nombre(a.apres) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="mt-10 text-xl font-semibold text-primary">{{ e.resultats.manquantsTitre }}</h3>
+          <p class="mt-2 text-sm text-base-content/70">{{ e.resultats.manquantsNote }}</p>
+          <div class="mt-4 overflow-x-auto rounded-box border border-base-300" tabindex="0" role="region" [attr.aria-label]="e.resultats.manquantsTitre">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="sr-only">{{ e.resultats.manquantsTitre }}</span></th>
+                  <th scope="col" class="text-right">{{ e.resultats.colonneAvant }}</th>
+                  <th scope="col" class="text-right">{{ e.resultats.colonneApres }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (m of manquants(); track m.id) {
+                  <tr>
+                    <th scope="row" class="font-normal">{{ e.resultats.nutriments[m.id] }}</th>
+                    <td class="text-right tabular-nums">{{ m.avant }} <span class="whitespace-nowrap text-base-content/70">({{ m.avantPart }})</span></td>
+                    <td class="text-right tabular-nums">{{ m.apres }} <span class="whitespace-nowrap text-base-content/70">({{ m.apresPart }})</span></td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="min-w-0">
+          <h3 class="text-xl font-semibold text-primary">{{ e.resultats.rayonsTitre }}</h3>
+          <p class="mt-2 text-sm text-base-content/70">{{ e.resultats.rayonsNote }}</p>
+          <ul class="mt-4 space-y-2.5">
+            @for (r of rayons; track r.id) {
+              <li class="grid grid-cols-[minmax(0,9.5rem)_1fr_auto] items-center gap-3 text-sm sm:grid-cols-[minmax(0,13rem)_1fr_auto]">
+                <span>{{ e.resultats.rayons[r.id] }}</span>
+                <span class="h-2.5 rounded-full bg-base-200" aria-hidden="true">
+                  <span class="block h-full rounded-full" [class.bg-primary]="r.id !== 'inconnu'" [class.bg-secondary]="r.id === 'inconnu'" [style.width]="r.largeur"></span>
+                </span>
+                <span class="text-right tabular-nums">{{ langue.nombre(r.produits) }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stockage" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.stockage }}</h2>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.stockage.paragraphes; track $index) {
+          <p class="mt-4">{{ p }}</p>
+        }
+      </div>
+      <div class="mt-8 overflow-x-auto rounded-box border border-base-300 bg-base-100" tabindex="0" role="region" [attr.aria-label]="e.sections.stockage">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.stockage.colonnes.usage }}</th>
+              <th scope="col">{{ e.stockage.colonnes.lit }}</th>
+              <th scope="col" class="min-w-[22rem]">{{ e.stockage.colonnes.pourquoi }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (id of usages; track id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.stockage.liste[id].usage }}</th>
+                <td>{{ e.stockage.liste[id].lit }}</td>
+                <td class="text-base-content/80">{{ e.stockage.liste[id].pourquoi }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mt-14 text-xl font-semibold text-primary">{{ e.stockage.benchmarkTitre }}</h3>
+      <p class="mt-3 max-w-[720px] text-base-content/80">{{ e.stockage.benchmarkIntro }}</p>
+      <div class="mt-6 overflow-x-auto rounded-box border border-base-300 bg-base-100" tabindex="0" role="region" [attr.aria-label]="e.stockage.benchmarkTitre">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ e.stockage.benchmarkColonnes.requete }}</th>
+              <th scope="col" class="text-right">pandas</th>
+              <th scope="col" class="text-right">DuckDB</th>
+              <th scope="col" class="text-right">PostgreSQL</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ligne of benchmark; track ligne.id) {
+              <tr>
+                <th scope="row" class="font-normal">{{ e.stockage.requetes[ligne.id] }}</th>
+                <td class="text-right tabular-nums" [class.font-semibold]="rapide(ligne, ligne.pandas)" [class.text-primary]="rapide(ligne, ligne.pandas)">{{ temps(ligne.pandas) }} s</td>
+                <td class="text-right tabular-nums" [class.font-semibold]="rapide(ligne, ligne.duckdb)" [class.text-primary]="rapide(ligne, ligne.duckdb)">{{ temps(ligne.duckdb) }} s</td>
+                <td class="text-right tabular-nums" [class.font-semibold]="rapide(ligne, ligne.postgres)" [class.text-primary]="rapide(ligne, ligne.postgres)">{{ temps(ligne.postgres) }} s</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <ul class="mt-4 max-w-[720px] list-disc space-y-1.5 pl-5 text-sm text-base-content/70">
+        @for (limite of e.stockage.benchmarkLimites; track $index) {
+          <li>{{ limite }}</li>
+        }
+      </ul>
+
+      <h3 class="mt-14 text-xl font-semibold text-primary">{{ e.stockage.exportTitre }}</h3>
+      <div class="max-w-[720px] text-base-content/80">
+        @for (p of e.stockage.export; track $index) {
+          <p class="mt-3">{{ p }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="limites" class="scroll-mt-20">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.limites }}</h2>
+      <ul class="mt-4 max-w-[720px] list-disc space-y-3 pl-5 text-base-content/80">
+        @for (limite of e.limites; track $index) {
+          <li>{{ limite }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="suite" class="scroll-mt-20 border-t border-base-300 bg-base-200">
+    <div class="conteneur py-16">
+      <h2 class="titre-section">{{ e.sections.suite }}</h2>
+      <p class="mt-4 max-w-[720px] text-base-content/80">{{ e.suite.paragraphe }}</p>
+      <ul class="steps steps-vertical md:steps-horizontal mt-10 w-full">
+        @for (jalon of t().nutriscope.jalons; track $index) {
+          <li class="step" [class.step-primary]="$index < nutriscope.jalonsFaits">
+            <span class="text-left md:text-center">
+              {{ jalon.nom }}
+              @if (jalon.date) {
+                <span class="block text-xs text-base-content/70">{{ jalon.date }}</span>
+              }
+            </span>
+          </li>
+        }
+      </ul>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a [href]="langue.lien('#nutriscope')" class="btn btn-outline btn-primary">{{ e.retour }}</a>
+        <a [href]="liens.nutriscope" target="_blank" rel="noopener" class="btn btn-ghost">{{ e.suite.boutonCode }}</a>
+      </div>
+      <p class="mt-8 text-sm text-base-content/70">{{ e.suite.credit }}</p>
+    </div>
+  </section>
+</main>

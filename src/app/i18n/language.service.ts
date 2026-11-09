@@ -4,14 +4,19 @@ import { Meta, Title } from '@angular/platform-browser';
 import { en } from './en';
 import { fr } from './fr';
 import { appliquerSeo } from './seo';
-import { Langue } from './translations';
+import { Langue, PageId } from './translations';
 
 /** Clé de `localStorage` lue par `public/langue.js` (redirection depuis la racine). */
 export const CLE_STOCKAGE = 'langue';
 
-/** Langue d'une URL : `…/en` ou `…/en/` → anglais, tout le reste → français. */
+/** Langue d'une URL : `…/en`, `…/en/` et `…/en/nutriscope[/]` → anglais, tout le reste → français. */
 export function langueDepuisChemin(chemin: string): Langue {
-  return /\/en\/?$/.test(chemin) ? 'en' : 'fr';
+  return /\/en(?:\/(?:nutriscope\/?)?)?$/.test(chemin) ? 'en' : 'fr';
+}
+
+/** Page d'une URL : `…/nutriscope[/]` → étude de cas, tout le reste → accueil. */
+export function pageDepuisChemin(chemin: string): PageId {
+  return /\/nutriscope\/?$/.test(chemin) ? 'nutriscope' : 'accueil';
 }
 
 /**
@@ -23,6 +28,12 @@ export const LANGUE_INITIALE = new InjectionToken<Langue>('LANGUE_INITIALE', {
   factory: () => langueDepuisChemin(inject(PlatformLocation).pathname),
 });
 
+/** Page affichée, déduite de l'URL pour la même raison que la langue. */
+export const PAGE_INITIALE = new InjectionToken<PageId>('PAGE_INITIALE', {
+  providedIn: 'root',
+  factory: () => pageDepuisChemin(inject(PlatformLocation).pathname),
+});
+
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly doc = inject(DOCUMENT);
@@ -32,6 +43,8 @@ export class LanguageService {
 
   /** Langue de la page. Fixe : changer de langue, c'est changer d'URL (`/` ↔ `/en/`). */
   readonly lang = signal<Langue>(inject(LANGUE_INITIALE)).asReadonly();
+  /** Page affichée. Fixe, comme la langue : changer de page, c'est charger une autre URL. */
+  readonly page = signal<PageId>(inject(PAGE_INITIALE)).asReadonly();
   readonly t = computed(() => (this.lang() === 'fr' ? fr : en));
   /** Locale `Intl` de la langue active. */
   readonly locale = computed(() => (this.lang() === 'fr' ? 'fr-FR' : 'en-US'));
@@ -41,7 +54,7 @@ export class LanguageService {
   constructor() {
     effect(() => {
       this.doc.documentElement.lang = this.lang();
-      appliquerSeo(this.doc, this.title, this.meta, this.lang(), this.t());
+      appliquerSeo(this.doc, this.title, this.meta, this.lang(), this.t(), this.page());
     });
   }
 
@@ -67,9 +80,23 @@ export class LanguageService {
     return href.startsWith('#') && this.lang() === 'en' ? `en/${href}` : href;
   }
 
-  /** Lien vers la page d'une langue, relatif au `<base href>`. */
+  /** Lien vers la page courante dans une autre langue, relatif au `<base href>`. */
   lienLangue(l: Langue): string {
-    return l === 'en' ? 'en/' : './';
+    const chemin = this.page() === 'nutriscope' ? 'nutriscope/' : '';
+    return l === 'en' ? `en/${chemin}` : chemin || './';
+  }
+
+  /** Lien vers l'étude de cas NutriScope, dans la langue active. */
+  lienEtude(): string {
+    return this.lang() === 'en' ? 'en/nutriscope/' : 'nutriscope/';
+  }
+
+  /**
+   * Ancre de l'étude de cas. Comme pour `lien()`, `#id` mènerait à l'accueil (`<base href>`) :
+   * on rappelle donc le chemin de la page.
+   */
+  ancreEtude(id: string): string {
+    return `${this.lienEtude()}#${id}`;
   }
 
   /** Mémorise le choix de langue : `public/langue.js` le relit pour ne plus rediriger depuis `/`. */

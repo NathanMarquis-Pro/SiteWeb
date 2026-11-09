@@ -1,10 +1,13 @@
 import { Meta, Title } from '@angular/platform-browser';
 import { GROUPES_COMPETENCES } from '../sections/competences/competences.data';
 import { LIENS, SITE_URL } from '../shared/liens';
-import { Langue, Translations } from './translations';
+import { Langue, PageId, Translations } from './translations';
 
-/** URL absolue de la page de chaque langue (le français est aussi la page par défaut). */
+/** URL absolue de l'accueil dans chaque langue (le français est aussi la page par défaut). */
 export const URL_PAGE: Record<Langue, string> = { fr: SITE_URL, en: `${SITE_URL}en/` };
+/** URL absolue de l'étude de cas NutriScope dans chaque langue. */
+export const URL_ETUDE: Record<Langue, string> = { fr: `${SITE_URL}nutriscope/`, en: `${SITE_URL}en/nutriscope/` };
+export const URLS: Record<PageId, Record<Langue, string>> = { accueil: URL_PAGE, nutriscope: URL_ETUDE };
 
 const LOCALE_OG: Record<Langue, string> = { fr: 'fr_FR', en: 'en_US' };
 const LANGUES: Langue[] = ['fr', 'en'];
@@ -27,6 +30,21 @@ export function jsonLdPersonne(lang: Langue, t: Translations): Record<string, un
   };
 }
 
+/** Données structurées `Article` de l'étude de cas : titre, description et auteur de la page. */
+export function jsonLdEtude(lang: Langue, t: Translations): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: t.etude.titre,
+    description: t.etude.meta.description,
+    inLanguage: lang,
+    url: URL_ETUDE[lang],
+    mainEntityOfPage: URL_ETUDE[lang],
+    image: `${SITE_URL}assets/og-image.jpg`,
+    author: { '@type': 'Person', name: 'Nathan Marquis', url: URL_PAGE[lang], sameAs: [LIENS.linkedin, LIENS.github] },
+  };
+}
+
 /** Crée ou met à jour un élément de `<head>` repéré par `selecteur`. */
 function poser(doc: Document, tag: 'link' | 'script', selecteur: string, attrs: Record<string, string>, texte?: string): void {
   let el = doc.head.querySelector(selecteur);
@@ -42,13 +60,14 @@ function poser(doc: Document, tag: 'link' | 'script', selecteur: string, attrs: 
  * Applique le titre, la description, Open Graph, canonical, hreflang et JSON-LD de la langue.
  * Exécuté aussi pendant le pré-rendu : ces balises se retrouvent dans le HTML statique.
  */
-export function appliquerSeo(doc: Document, title: Title, meta: Meta, lang: Langue, t: Translations): void {
-  const { titre, description } = t.meta;
-  const url = URL_PAGE[lang];
+export function appliquerSeo(doc: Document, title: Title, meta: Meta, lang: Langue, t: Translations, page: PageId = 'accueil'): void {
+  const { titre, description } = page === 'accueil' ? t.meta : t.etude.meta;
+  const url = URLS[page][lang];
   const autre = LANGUES.find((l) => l !== lang)!;
 
   title.setTitle(titre);
   meta.updateTag({ name: 'description', content: description });
+  meta.updateTag({ property: 'og:type', content: page === 'accueil' ? 'website' : 'article' });
   meta.updateTag({ property: 'og:title', content: titre });
   meta.updateTag({ property: 'og:description', content: description });
   meta.updateTag({ property: 'og:url', content: url });
@@ -60,8 +79,8 @@ export function appliquerSeo(doc: Document, title: Title, meta: Meta, lang: Lang
 
   poser(doc, 'link', 'link[rel="canonical"]', { rel: 'canonical', href: url });
   for (const l of LANGUES) {
-    poser(doc, 'link', `link[rel="alternate"][hreflang="${l}"]`, { rel: 'alternate', hreflang: l, href: URL_PAGE[l] });
+    poser(doc, 'link', `link[rel="alternate"][hreflang="${l}"]`, { rel: 'alternate', hreflang: l, href: URLS[page][l] });
   }
-  poser(doc, 'link', 'link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default', href: SITE_URL });
-  poser(doc, 'script', 'script[type="application/ld+json"]', { type: 'application/ld+json' }, JSON.stringify(jsonLdPersonne(lang, t)));
+  poser(doc, 'link', 'link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default', href: URLS[page].fr });
+  poser(doc, 'script', 'script[type="application/ld+json"]', { type: 'application/ld+json' }, JSON.stringify(page === 'accueil' ? jsonLdPersonne(lang, t) : jsonLdEtude(lang, t)));
 }

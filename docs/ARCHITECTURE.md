@@ -4,7 +4,7 @@ Complète le [README](../README.md). La spécification d'origine (`SPEC-refonte-
 
 ## Principes
 
-- **Une page, des ancres.** Pas de routeur côté navigateur (il n'existe que dans la configuration serveur, pour pré-rendre `/` et `/en`). S'il faut une page d'étude de cas NutriScope (phase 2), fournir le routeur aussi côté navigateur à ce moment-là, ajouter la route dans `app.routes.ts` et un `404.html` de repli pour GitHub Pages.
+- **Deux pages, quatre URL pré-rendues.** L'accueil (une page, des ancres) et l'étude de cas NutriScope (`pages/etude-nutriscope/`, chargée en différé), chacune en `/` + `/en/`. `App` est une coque (navbar, `router-outlet`, footer). Les liens entre pages sont des `<a href>` ordinaires, jamais `routerLink` : chaque page se charge en entier, langue et SEO viennent de l'URL. Pas de `404.html` : toutes les pages existent en HTML statique. Le routeur dans le bundle navigateur coûte environ 30 kB transférés (63 → 92 kB de JS initial).
 - **Textes dans les dictionnaires, structure dans les données.** Un `*.data.ts` décrit l'ordre, les liens, les logos, les chiffres. Les dictionnaires `fr.ts` / `en.ts` portent tous les textes, **indexés par identifiant** (`Record<ProjetId, …>`, `Record<EtapeId, …>`…). Les identifiants sont déclarés dans `i18n/translations.ts` ; une entrée oubliée dans une langue fait échouer la compilation.
 - **Un dossier par section** dans `src/app/sections/`, avec ses données.
 - **`LanguageService`** : `lang` (en lecture seule, déduite de l'URL), `t` (dictionnaire actif), `nombre()` (format selon la langue), `lien()` (préfixe les ancres en anglais), `memoriser()` (écrit le choix dans `localStorage`). Un `effect` met à jour `<html lang>` et appelle `appliquerSeo()` (`i18n/seo.ts`).
@@ -22,7 +22,7 @@ Décisions prises avec leurs compromis ; la page est statique (GitHub Pages), sa
 | Complexité | routes serveur, ancres préfixées, `langue.js` | minimale |
 | GitHub Pages | `en/index.html` est servi pour `/en/` (`/en` est redirigé), aucun 404 | rien à faire |
 
-- **Langue = URL.** `LANGUE_INITIALE` lit `PlatformLocation.pathname` (`…/en` ou `…/en/` → anglais). Le serveur et le navigateur calculent la même valeur, donc l'hydratation ne détecte aucun écart. `localStorage` n'est jamais lu par Angular.
+- **Langue et page = URL.** `LANGUE_INITIALE` et `PAGE_INITIALE` lisent `PlatformLocation.pathname` (`…/en`, `…/en/`, `…/en/nutriscope[/]` → anglais ; `…/nutriscope[/]` → étude de cas). `lienLangue()` reste sur la page courante, `lienEtude()` et `ancreEtude()` rappellent le chemin de la page (une ancre nue mènerait à l'accueil à cause du `<base href>`). Le serveur et le navigateur calculent la même valeur, donc l'hydratation ne détecte aucun écart. `localStorage` n'est jamais lu par Angular.
 - **Routeur côté serveur uniquement.** `app.config.server.ts` fournit `provideRouter(routes)` avec deux routes sans composant (`''` et `en`), juste pour que le builder découvre les pages à pré-rendre. Le bundle navigateur n'embarque pas le routeur et `App` n'a pas de `<router-outlet>` : le DOM est inchangé.
 - **Sortie** : `outputMode: static`, sans clé `ssr` ni `server.ts` ; `index.csr.html` est un repli généré par le builder, inutilisé.
 - **Redirection `public/langue.js`** : script classique, bloquant, dans `<head>` après `<base>`. Depuis la racine uniquement, il redirige vers `/en/` si le choix mémorisé est `en`, ou, sans choix, si `navigator.language` n'est pas `fr*`. Jamais pour les robots (`bot|crawl|spider|slurp|facebookexternalhit|linkedin|embedly`), jamais depuis `/en/` : un lien partagé vers `/en/` reste en anglais. Un lien partagé vers `/` s'ouvre en anglais chez un visiteur non francophone qui n'a rien choisi.
@@ -86,4 +86,5 @@ Un seul `h1`, un `h2` par section, aucun saut de niveau. Contraste ≥ 4,5:1 (vo
 - **CV** : `public/assets/CV_Nathan_Marquis.pdf` n'est pas à jour (48 tests, DUT 2025, dates du stage).
 - **Liens GitHub** : Wine Quality n'a pas de lien (champ `lien?` de `projets.data.ts`).
 - **URL publique** : `https://nathanmarquis-pro.github.io/SiteWeb/` (confirmée ; cohérente avec le remote `NathanMarquis-Pro/SiteWeb`). Si elle change, voir « Domaine personnalisé » dans le README.
-- **Phase 2** : page d'étude de cas NutriScope ; mise à jour des jalons 4 à 7.
+- **Phase 2 (faite)** : page d'étude de cas NutriScope. Chiffres recopiés de `docs/data/rapport_nettoyage.md` (4 nov. 2026) et `docs/data/benchmark.md` du dépôt NutriScope, gardés cohérents par `etude-nutriscope.data.spec.ts`. À refaire à la main si le rapport est régénéré.
+- **À faire** : mise à jour des jalons 4 à 7 (accueil et étude).

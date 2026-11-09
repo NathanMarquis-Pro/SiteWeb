@@ -1,9 +1,10 @@
 /*
- * Redirection de langue depuis la racine du site, exécutée dans <head> avant le premier rendu
- * (aucun flash). `/` est la page française et `/en/` la page anglaise, toutes deux pré-rendues.
+ * Redirection de langue depuis une page française, exécutée dans <head> avant le premier rendu
+ * (aucun flash). `/` et `/nutriscope/` sont les pages françaises, `/en/` et `/en/nutriscope/` les
+ * pages anglaises, toutes pré-rendues.
  *
- * On redirige vers `/en/` seulement si :
- *  - on est sur la racine (jamais sur `/en/` : un lien partagé vers `/en/` reste en anglais) ;
+ * On redirige vers la page anglaise correspondante seulement si :
+ *  - on est sur une page française (jamais sur `/en/…` : un lien partagé vers `/en/` reste en anglais) ;
  *  - le visiteur n'est pas un robot (les robots indexent `/` en français, `/en/` par hreflang) ;
  *  - son choix mémorisé (boutons FR / EN) est « en », ou, sans choix, `navigator.language` n'est pas français.
  *
@@ -23,10 +24,13 @@
     return /^fr([-_]|$)/i.test(navigateur) ? 'fr' : 'en';
   }
 
-  /** Chemin de la page anglaise si `pathname` est la racine du site, sinon null. */
+  /** Chemin de la page anglaise si `pathname` est une page française (accueil ou étude de cas), sinon null. */
   function cheminRedirection(pathname, base, search, hash) {
-    var racine = pathname === base || pathname === base + 'index.html';
-    return racine ? base + 'en/' + (search || '') + (hash || '') : null;
+    var suffixe = (search || '') + (hash || '');
+    if (pathname === base || pathname === base + 'index.html') return base + 'en/' + suffixe;
+    var relatif = pathname.indexOf(base) === 0 ? pathname.slice(base.length) : '';
+    if (/^nutriscope(\/(index\.html)?)?$/.test(relatif)) return base + 'en/nutriscope/' + suffixe;
+    return null;
   }
 
   window.NMLangue = { langueCible: langueCible, cheminRedirection: cheminRedirection };

@@ -60,6 +60,20 @@ describe('langue.js', () => {
       expect(lib().cheminRedirection('/', '/')).toBe('/en/');
     });
 
+    it("cible /en/nutriscope/ depuis l'étude de cas, avec ou sans barre finale", () => {
+      expect(lib().cheminRedirection('/SiteWeb/nutriscope/', '/SiteWeb/')).toBe('/SiteWeb/en/nutriscope/');
+      expect(lib().cheminRedirection('/SiteWeb/nutriscope', '/SiteWeb/')).toBe('/SiteWeb/en/nutriscope/');
+      expect(lib().cheminRedirection('/SiteWeb/nutriscope/index.html', '/SiteWeb/')).toBe('/SiteWeb/en/nutriscope/');
+      expect(lib().cheminRedirection('/SiteWeb/nutriscope/', '/SiteWeb/', '', '#donnees')).toBe('/SiteWeb/en/nutriscope/#donnees');
+      expect(lib().cheminRedirection('/nutriscope/', '/')).toBe('/en/nutriscope/');
+    });
+
+    it('ne redirige pas hors des pages françaises', () => {
+      expect(lib().cheminRedirection('/SiteWeb/en/nutriscope/', '/SiteWeb/')).toBeNull();
+      expect(lib().cheminRedirection('/SiteWeb/nutriscope-autre/', '/SiteWeb/')).toBeNull();
+      expect(lib().cheminRedirection('/autre/nutriscope/', '/SiteWeb/')).toBeNull();
+    });
+
     it('ne redirige pas hors de la racine', () => {
       expect(lib().cheminRedirection('/SiteWeb/en/', '/SiteWeb/')).toBeNull();
       expect(lib().cheminRedirection('/SiteWeb/autre', '/SiteWeb/')).toBeNull();
