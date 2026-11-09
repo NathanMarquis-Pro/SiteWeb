@@ -55,7 +55,7 @@ export const PORTFOLIO: PortfolioData = {
     title: 'Développeur Fullstack',
     heroTitle: { main: 'Vos projets,', emphasis: 'mes futures missions' },
     tagline: 'Allier robustesse et simplicité — rien de tel pour un projet réussi.',
-    cvPath: 'assets/cv.pdf',
+    cvPath: 'assets/CV_Nathan_Marquis.pdf',
     cvDownloadName: 'CV Nathan Marquis',
     stackBadges: ['Angular', 'Spring Boot', 'Java', 'TypeScript', 'PostgreSQL', 'Docker', 'REST API'],
     about: {

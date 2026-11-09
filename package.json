@@ -18,7 +18,11 @@
     "@angular/platform-browser": "^20.3.35",
     "@angular/router": "^20.3.35",
     "@tabler/icons-webfont": "^3.44.0",
+    "@tailwindcss/postcss": "^4.3.5",
+    "daisyui": "^5.7.50",
+    "postcss": "^8.5.32",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^4.3.5",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -37,6 +41,10 @@
   },
   "overrides": {
     "glob": "^14.0.3",
-    "minimatch": "^11.0.1"
+    "minimatch": "^11.0.1",
+    "karma": {
+      "glob": "^7.2.3",
+      "minimatch": "^3.1.2"
+    }
   }
 }
