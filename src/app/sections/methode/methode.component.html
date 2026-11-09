@@ -1,0 +1,24 @@
+<section id="methode" class="scroll-mt-20 border-y border-base-300 bg-base-200">
+  <div class="conteneur flex flex-col gap-10 py-18 lg:flex-row">
+    <div class="lg:w-1/3">
+      <h2 class="titre-section leading-[1.15]">{{ t().methode.titre }}</h2>
+      <p class="mt-4 max-w-sm text-lg text-base-content/80">{{ t().methode.intro }}</p>
+    </div>
+    <ul class="list min-w-0 rounded-box border border-base-300 bg-base-100 lg:flex-1">
+      @for (habitude of habitudes; track habitude.id) {
+        @let item = t().methode.habitudes[habitude.id];
+        <li class="list-row py-6">
+          <div class="list-col-grow">
+            <p class="text-lg font-semibold">{{ item.titre }}</p>
+            <p class="mt-1 max-w-prose text-base text-base-content/80">
+              {{ item.texte }}
+              @if (item.lien) {
+                <a class="link link-primary" [href]="langue.lien(habitude.cible)">{{ item.lien }}</a>
+              }
+            </p>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

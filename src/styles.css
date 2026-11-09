@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "nathan";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #FFFFFF;
+  --color-base-200: #F6F5F1;
+  --color-base-300: #E7E4DC;
+  --color-base-content: #1E2230;
+
+  --color-primary: #14213D;
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #555B6B;
+  --color-secondary-content: #FFFFFF;
+  --color-accent: #2E7D57;
+  --color-accent-content: #FFFFFF;
+  --color-neutral: #2A2F3D;
+  --color-neutral-content: #E6E8EE;
+
+  --color-info: #2F5D8C;
+  --color-info-content: #FFFFFF;
+  --color-success: #2E7D57;
+  --color-success-content: #FFFFFF;
+  --color-warning: #F2C66D;
+  --color-warning-content: #1E2230;
+  --color-error: #B4413A;
+  --color-error-content: #FFFFFF;
+
+  --radius-selector: 2rem;   /* badges, toggles : forme « pilule » */
+  --radius-field: 0.5rem;    /* boutons */
+  --radius-box: 0.75rem;     /* cartes, stats, alert, mockup */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;                /* pas d'ombres ni d'effet 3D */
+  --noise: 0;
+}
+
+@theme {
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Conteneur commun des sections : centré, plus large que les 1120 px de la spec */
+@utility conteneur {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1360px;
+  padding-inline: 1.5rem;
+}
+
+/* Accessibilité : focus visible sur les liens (les .btn gèrent le leur via DaisyUI) */
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+#contact a:focus-visible {
+  outline-color: var(--color-primary-content);
+}
+
+/* Cibles tactiles d'au moins 44 px sur mobile */
+@media (max-width: 639px) {
+  .btn {
+    min-height: 2.75rem;
+  }
+}
+
+/* Motifs de titres réutilisés par les sections */
+@utility titre-section {
+  @apply font-serif text-[36px] font-normal text-primary;
+}
+@utility surtitre {
+  @apply text-base-content/70;
+}

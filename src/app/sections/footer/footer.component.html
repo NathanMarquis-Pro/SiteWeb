@@ -1,0 +1,16 @@
+<footer id="contact" class="scroll-mt-20 bg-primary text-primary-content">
+  <div class="conteneur pt-18 pb-8">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div class="max-w-[540px]">
+        <h2 class="font-serif text-[clamp(34px,4.4vw,50px)] leading-tight font-normal">{{ t().footer.titre }}</h2>
+        <p class="mt-3 text-[17px] opacity-80">{{ t().footer.texte }}</p>
+      </div>
+      <div class="flex flex-wrap gap-2.5">
+        <a class="btn border-0 bg-base-100 text-primary" [href]="'mailto:' + liens.email">{{ liens.email }}</a>
+        <a class="btn btn-outline border-primary-content/40 text-primary-content" [href]="liens.linkedin" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-outline border-primary-content/40 text-primary-content" [href]="liens.github" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="mt-14 border-t border-primary-content/20 pt-5 text-sm opacity-70">{{ t().footer.basDePage }}</p>
+  </div>
+</footer>

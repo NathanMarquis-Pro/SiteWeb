@@ -1,20 +1,30 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component'; // Import HeaderComponent
-import { FooterComponent } from './footer/footer.component'; // Import FooterComponent
-import { HeroComponent } from './hero/hero.component'; // Import IntroComponent
-import { AboutComponent } from './about/about.component'; // Import AboutComponent
-import { EducationComponent } from './education/education.component'; // Import EducationComponent
-import { ProjectsComponent } from './projects/projects.component'; // Import ProjectsComponent
-import { ExperienceComponent } from './experiences/experience.component'; // Import ExperienceComponent
-import { SkillComponent } from './skills/skill.component'; // Import SkillComponent
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CompetencesComponent } from './sections/competences/competences.component';
+import { FooterComponent } from './sections/footer/footer.component';
+import { HeroComponent } from './sections/hero/hero.component';
+import { HorsCodeComponent } from './sections/hors-code/hors-code.component';
+import { ImsaComponent } from './sections/imsa/imsa.component';
+import { MethodeComponent } from './sections/methode/methode.component';
+import { NavbarComponent } from './sections/navbar/navbar.component';
+import { NutriscopeComponent } from './sections/nutriscope/nutriscope.component';
+import { ParcoursComponent } from './sections/parcours/parcours.component';
+import { ProjetsComponent } from './sections/projets/projets.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, HeroComponent, AboutComponent, EducationComponent, ProjectsComponent, ExperienceComponent, SkillComponent],
+  imports: [
+    NavbarComponent,
+    HeroComponent,
+    NutriscopeComponent,
+    ImsaComponent,
+    MethodeComponent,
+    ProjetsComponent,
+    ParcoursComponent,
+    CompetencesComponent,
+    HorsCodeComponent,
+    FooterComponent,
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  protected title = 'portfolio';
-}
+export class App {}
