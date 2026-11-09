@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PORTFOLIO } from '../../data/portfolio.data';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  readonly profile = PORTFOLIO.profile;
   isMenuOpen = false;
 
   toggleMenu(): void {

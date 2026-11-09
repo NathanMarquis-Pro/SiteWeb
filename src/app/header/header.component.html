@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar">
-        <div class="nav-logo">Nathan Marquis</div>
+        <div class="nav-logo">{{ profile.name }}</div>
 
         <button class="menu" (click)="toggleMenu()" aria-label="Menu">
             <i class="ti" [class.ti-menu-2]="!isMenuOpen" [class.ti-x]="isMenuOpen" aria-hidden="true"></i>

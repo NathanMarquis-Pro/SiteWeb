@@ -1,19 +1,15 @@
 <section id="hero">
-    <span class="hero-tag">Développeur Fullstack</span>
-    <h1 class="hero-title serif">Vos projets, <br><em> mes futures missions</em></h1>
-    <p class="hero-sub">Allier robustesse et simplicité — rien de tel pour un projet réussi.</p>
+    <span class="hero-tag">{{ profile.title }}</span>
+    <h1 class="hero-title serif">{{ profile.heroTitle.main }} <br><em> {{ profile.heroTitle.emphasis }}</em></h1>
+    <p class="hero-sub">{{ profile.tagline }}</p>
     <div class="hero-ctas">
         <button class="btn-primary"><a href="#projects">Voir mes projets</a></button>
-        <a href="assets/cv.pdf" class="btn-ghost" download="CV Nathan Marquis">Télécharger le CV →</a>
+        <a [href]="profile.cvPath" class="btn-ghost" [attr.download]="profile.cvDownloadName">Télécharger le CV →</a>
     </div>
 
     <div class="stack-badges">
-        <span class="badge">Angular</span>
-        <span class="badge">Spring Boot</span>
-        <span class="badge">Java</span>
-        <span class="badge">TypeScript</span>
-        <span class="badge">PostgreSQL</span>
-        <span class="badge">Docker</span>
-        <span class="badge">REST API</span>
+        @for (badge of profile.stackBadges; track badge) {
+            <span class="badge">{{ badge }}</span>
+        }
     </div>
 </section>
